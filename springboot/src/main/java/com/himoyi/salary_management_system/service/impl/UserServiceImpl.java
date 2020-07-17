@@ -1,10 +1,14 @@
 package com.himoyi.salary_management_system.service.impl;
 
+import com.himoyi.salary_management_system.common.dto.UserDto;
 import com.himoyi.salary_management_system.pojo.User;
 import com.himoyi.salary_management_system.mapper.UserMapper;
 import com.himoyi.salary_management_system.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -16,5 +20,18 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+
+    @Autowired
+    UserMapper userMapper;
+
+    @Override
+    public List<UserDto> selectUsers() {
+        return userMapper.selectUsers();
+    }
+
+    @Override
+    public UserDto selectUserById(Long id) {
+        return userMapper.selectUserById(id);
+    }
 
 }

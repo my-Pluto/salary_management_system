@@ -1,7 +1,10 @@
 package com.himoyi.salary_management_system.service;
 
+import com.himoyi.salary_management_system.common.dto.UserDto;
 import com.himoyi.salary_management_system.pojo.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface UserService extends IService<User> {
 
+    public List<UserDto> selectUsers();
+
+    public UserDto selectUserById(Long id);
 }

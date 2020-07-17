@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.himoyi.salary_management_system.mapper.UserMapper">
+    <select id="selectUsers" resultType="com.himoyi.salary_management_system.common.dto.UserDto" >
+        SELECT user.`id`, user.`name`, department.`name` department, user.`gmt_create` gmtModified FROM user, department,  employee WHERE user.`id` = employee.`id` AND employee.`department` = department.`id`
+    </select>
+    <select id="selectUserById" resultType="com.himoyi.salary_management_system.common.dto.UserDto" >
+        SELECT user.`id`, user.`name`, department.`name` department, user.`gmt_create` gmtModified FROM user, department,  employee WHERE user.`id` = #{id} AND user.`id` = employee.`id` AND employee.`department` = department.`id`
+    </select>
+</mapper>

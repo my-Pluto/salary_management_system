@@ -28,7 +28,7 @@ public class User implements Serializable {
     /**
      * 员工工号
      */
-      @TableId(value = "id", type = IdType.ID_WORKER)
+    @TableId(value = "id", type = IdType.ID_WORKER)
     private Long id;
 
     /**
@@ -50,13 +50,13 @@ public class User implements Serializable {
     /**
      * 创建时间
      */
-      @TableField(fill = FieldFill.INSERT)
+    @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
 
     /**
      * 修改时间
      */
-      @TableField(fill = FieldFill.INSERT_UPDATE)
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
 
     /**
