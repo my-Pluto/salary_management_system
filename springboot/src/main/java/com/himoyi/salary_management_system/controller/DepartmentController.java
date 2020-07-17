@@ -1,6 +1,7 @@
 package com.himoyi.salary_management_system.controller;
 
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
@@ -68,16 +69,7 @@ public class DepartmentController {
     @PostMapping("/department")
     @RequiresAuthentication
     public Result getDepartment(@RequestBody DepartmentDto departmentDto) {
-        Map<String, Object> map = MapUtil.newHashMap();
-        if (departmentDto.getId() != null) {
-            map.put("id", departmentDto.getId());
-        }
-        if (departmentDto.getName() != null) {
-            map.put("name", departmentDto.getName());
-        }
-        if (departmentDto.getProvince() != null) {
-            map.put("province", departmentDto.getProvince());
-        }
+        Map<String, Object> map = BeanUtil.beanToMap(departmentDto, false, true);
         List<Department> departments = departmentService.listByMap(map);
         return Result.success("查询成功！", departments);
     }

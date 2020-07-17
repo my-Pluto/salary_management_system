@@ -1,9 +1,15 @@
 package com.himoyi.salary_management_system.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.himoyi.salary_management_system.common.Result;
+import com.himoyi.salary_management_system.pojo.Employee;
+import com.himoyi.salary_management_system.service.EmployeeService;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 /**
  * <p>
@@ -16,6 +22,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
+    @Autowired
+    EmployeeService employeeService;
 
+    @GetMapping("/employees")
+    @RequiresAuthentication
+    public Result getEmployees() {
+        List<Employee> employees = employeeService.list();
+        return Result.success("查询成功！", employees);
+    }
+
+    @GetMapping("/{id}")
+    @RequiresAuthentication
+    public Result getEmployee(@PathVariable(name = "id") Long id) {
+        Employee employee = employeeService.getById(id);
+        return Result.success("查询成功！", employee);
+    }
+
+//    @PostMapping("employees")
+//    @RequiresAuthentication
+//    public Result getEmployees(@RequestBody )
 }
 

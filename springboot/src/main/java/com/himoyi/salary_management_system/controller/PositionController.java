@@ -2,13 +2,10 @@ package com.himoyi.salary_management_system.controller;
 
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.map.MapUtil;
 import com.himoyi.salary_management_system.common.Result;
 import com.himoyi.salary_management_system.common.dto.PositionDto;
 import com.himoyi.salary_management_system.pojo.Position;
 import com.himoyi.salary_management_system.service.PositionService;
-import javafx.geometry.Pos;
-import org.apache.ibatis.annotations.Delete;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -42,17 +39,7 @@ public class PositionController {
     @PostMapping("/positions")
     @RequiresAuthentication
     public Result getPositions(@RequestBody PositionDto positionDto) {
-        Map<String, Object> map = MapUtil.newHashMap();
-
-        if (positionDto.getId() != null)
-            map.put("id", positionDto.getId());
-        if (positionDto.getDepartment() != null)
-            map.put("department", positionDto.getDepartment());
-        if (positionDto.getDepartmentId() != null)
-            map.put("departmentId", positionDto.getDepartmentId());
-        if (positionDto.getName() != null) {
-            map.put("name", positionDto.getName());
-        }
+        Map<String, Object> map = BeanUtil.beanToMap(positionDto, false, true);
 
         List<Position> positions = positionService.listByMap(map);
         return Result.success("查询成功！", positions);
