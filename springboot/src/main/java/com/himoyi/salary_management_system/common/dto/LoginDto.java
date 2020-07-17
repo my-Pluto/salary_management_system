@@ -5,6 +5,9 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
+/**
+ * 登录dto
+ */
 @Data
 public class LoginDto implements Serializable {
 

@@ -27,11 +27,19 @@ public class AccountController {
     @Autowired
     JwtUtils jwtUtils;
 
+    /**
+     * 登录API
+     * @param loginDto
+     * @param response
+     * @return
+     */
     @GetMapping("/login")
     public Result login(@Validated @RequestBody LoginDto loginDto, HttpServletResponse response) {
 
+        // 查询用户
         User user = userService.getOne(new QueryWrapper<User>().eq("id", loginDto.getId()));
 
+        // 验证登录信息
         if (user == null) {
             return Result.fail("该账号不存在！", null);
         }
@@ -40,11 +48,13 @@ public class AccountController {
             return Result.fail("密码错误！", null);
         }
 
+        // 生成token
         String jwt = jwtUtils.generateToken(user.getId());
 
         response.setHeader("Authorization", jwt);
         response.setHeader("Access-control-Expose-Headers", "Authorization");
 
+        // 返回结果
         return Result.success(MapUtil.builder()
                 .put("id", user.getId())
                 .put("name", user.getName())
@@ -52,6 +62,10 @@ public class AccountController {
                 .map());
     }
 
+    /**
+     * 退出结果
+     * @return
+     */
     @GetMapping("/loginout")
     public Result loginOut() {
         SecurityUtils.getSubject().logout();
