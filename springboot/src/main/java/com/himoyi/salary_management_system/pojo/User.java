@@ -26,15 +26,15 @@ public class User implements Serializable {
     private static final long serialVersionUID=1L;
 
     /**
-     * 用户id
+     * 员工工号
      */
       @TableId(value = "id", type = IdType.ID_WORKER)
     private Long id;
 
     /**
-     * 用户名，员工工号
+     * 员工姓名
      */
-    private Long name;
+    private String name;
 
     /**
      * 用户密码
