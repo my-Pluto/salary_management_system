@@ -4,6 +4,7 @@ import Element from 'element-ui'
 import "element-ui/lib/theme-chalk/index.css"
 import axios from 'axios'
 import Router from 'vue-router'
+import store from './store'
 
 import Login from './views/Login.vue'
 
@@ -31,5 +32,6 @@ const router = new Router({
 
 new Vue({
 	router,
+	store: store,
   render: h => h(App),
 }).$mount('#app')
