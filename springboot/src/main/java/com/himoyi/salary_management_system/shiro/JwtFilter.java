@@ -69,7 +69,7 @@ public class JwtFilter extends AuthenticatingFilter {
         String jwt = httpServletRequest.getHeader("Authorization");
 
         // 如果jwt不存在，则不需要登录拦截，返回true
-        if (jwt.isEmpty()) {
+        if (jwt == null || jwt.isEmpty()) {
             return true;
         } else {
 

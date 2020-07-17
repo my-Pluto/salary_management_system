@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author 张玉飞 陈辰 刘月锟 宫雅琦 邵景宇
- * @since 2020-07-16
+ * @since 2020-07-17
  */
 public interface FixedItemService extends IService<FixedItem> {
 

@@ -27,7 +27,7 @@ public class Coding {
         gc.setOutputDir(projectPath + "/src/main/java");
         gc.setAuthor("张玉飞 陈辰 刘月锟 宫雅琦 邵景宇");
         gc.setOpen(false);
-        gc.setFileOverride(false); // 是否覆盖
+        gc.setFileOverride(true); // 是否覆盖
         gc.setServiceName("%sService"); // 去Service的I前缀
         gc.setIdType(IdType.ID_WORKER);
         gc.setDateType(DateType.ONLY_DATE);

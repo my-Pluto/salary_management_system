@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author 张玉飞 陈辰 刘月锟 宫雅琦 邵景宇
- * @since 2020-07-16
+ * @since 2020-07-17
  */
 public interface ImportItemDataMapper extends BaseMapper<ImportItemData> {
 

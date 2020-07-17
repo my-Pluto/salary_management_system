@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author 张玉飞 陈辰 刘月锟 宫雅琦 邵景宇
- * @since 2020-07-16
+ * @since 2020-07-17
  */
 @Service
 public class FixedItemDataServiceImpl extends ServiceImpl<FixedItemDataMapper, FixedItemData> implements FixedItemDataService {

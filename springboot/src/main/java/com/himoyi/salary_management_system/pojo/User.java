@@ -17,7 +17,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author 张玉飞 陈辰 刘月锟 宫雅琦 邵景宇
- * @since 2020-07-16
+ * @since 2020-07-17
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -28,7 +28,7 @@ public class User implements Serializable {
     /**
      * 用户id
      */
-      @TableId(value = "id", type = IdType.AUTO)
+      @TableId(value = "id", type = IdType.ID_WORKER)
     private Long id;
 
     /**
