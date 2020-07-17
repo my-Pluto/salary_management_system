@@ -65,5 +65,10 @@ public class Position implements Serializable {
     @TableLogic
     private Integer isDeleted;
 
+    /**
+     * 部门id
+     */
+    private Long departmentId;
+
 
 }
