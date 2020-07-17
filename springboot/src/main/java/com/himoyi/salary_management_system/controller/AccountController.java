@@ -11,15 +11,13 @@ import com.himoyi.salary_management_system.util.JwtUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping
+@CrossOrigin
 public class AccountController {
 
     @Autowired
@@ -33,7 +31,7 @@ public class AccountController {
      * @param response
      * @return
      */
-    @GetMapping("/login")
+    @PostMapping("/login")
     public Result login(@Validated @RequestBody LoginDto loginDto, HttpServletResponse response) {
 
         // 查询用户
@@ -44,7 +42,7 @@ public class AccountController {
             return Result.fail("该账号不存在！", null);
         }
 
-        if (!user.getPassword().equals(SecureUtil.md5(loginDto.getPassword()))) {
+        if (!user.getPassword().equals(loginDto.getPassword())) {
             return Result.fail("密码错误！", null);
         }
 
