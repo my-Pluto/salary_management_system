@@ -55,6 +55,13 @@
 							_this.$store.commit("SET_TOKEN", jwt)
 							_this.$store.commit("SET_USERINFO", userInfo)
 							_this.$parent.show = true;
+							_this.$parent.username = res.data.data.name;
+							if (res.data.data.name == 'admin') {
+								_this.$parent.userManagement = true;
+							}
+							else {
+								_this.$parent.userManagement = false;
+							}
 							this.$router.push({path: '/index'});
 						}
 					})
