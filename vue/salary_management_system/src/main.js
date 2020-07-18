@@ -7,26 +7,32 @@ import Router from 'vue-router'
 import store from './store'
 
 import Login from './views/Login.vue'
-
+import Index from './views/Index.vue'
 
 Vue.config.productionTip = false
 Vue.use(Element)
-// axios.defaults.baseURL = '/api'
 Vue.prototype.$axios = axios
 Vue.use(Router)
 
 const routes = [
 	{
 		path: '/',
+		redirect: 'login',
+		},
+	{
+		path: '/login',
+		name: 'login',
 		component: Login
 	},
 	{
-		path: '/login',
-		component: Login
+		path: '/index',
+		name: 'index',
+		component: Index
 	}
 ]
 
 const router = new Router({
+	mode:'history',
 	routes
 })
 

@@ -47,10 +47,16 @@
 					  const _this = this
 					this.ruleForm.password = md5(this.ruleForm.password);
 		            this.$axios.post('http://localhost:8081/login', this.ruleForm).then(res => {
-						const jwt = res.headers['authorization']
-						const  userInfo = res.data.data;
-						_this.$store.commit("SET_TOKEN", jwt)
-						_this.$store.commit("SET_USERINFO", userInfo)
+						if (res.data.code != '200') {
+							this.$message.error(res.data.msg);
+						} else {
+							const jwt = res.headers['authorization']
+							const  userInfo = res.data.data;
+							_this.$store.commit("SET_TOKEN", jwt)
+							_this.$store.commit("SET_USERINFO", userInfo)
+							_this.$parent.show = true;
+							this.$router.push({path: '/index'});
+						}
 					})
 		          } else {
 		            console.log('error submit!!');
@@ -58,7 +64,17 @@
 		          }
 		        });
 		      }
-		    }
+		    },
+		created() {
+			if (this.$store.state.token == null || this.$store.state.token == '' ) {
+				this.$parent.show = false;
+			}
+			else{
+				console.log(this.$store.state.token)
+				this.$parent.show = true;
+				this.$router.push({path: '/index'});
+			}
+		}
         }
 </script>
  
