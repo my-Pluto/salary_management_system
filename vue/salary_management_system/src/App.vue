@@ -55,7 +55,7 @@ export default {
   data() {
 	  return {
 		  show : false,
-		  activeIndex: '/index',
+		  activeIndex: this.$route.path,
 		  userManagement: false,
 		  username: '',
 		  dialogVisible: false,
@@ -85,6 +85,7 @@ export default {
 	created() {
 		if(this.$store.state.token == null || this.$store.state.token == '') {
 			this.show = false;
+			return;
 		}
 		else {
 			this.show = true;
