@@ -5,14 +5,14 @@ import Login from '../views/Login.vue'
 import Index from '../views/Index.vue'
 import Users from '../views/Users.vue'
 import UsersData from '../views/UsersData.vue'
+import NewUser from '../views/NewUser.vue'
 
 Vue.use(Router)
 
-const routes = [
-	{
+const routes = [{
 		path: '/',
 		redirect: 'login',
-		},
+	},
 	{
 		path: '/login',
 		name: 'login',
@@ -30,18 +30,31 @@ const routes = [
 		path: '/users',
 		name: 'users',
 		component: Users,
-		children: [
-			{
+		meta: {
+			requireAuth: true
+		},
+		children: [{
 				path: 'usersdata',
 				name: 'usersdata',
-				component: UsersData
+				component: UsersData,
+				meta: {
+					requireAuth: true
+				}
 			},
+			{
+				path: 'newuser',
+				name: 'newuser',
+				component: NewUser,
+				meta: {
+					requireAuth: true
+				}
+			}
 		]
 	}
 ]
 
 const router = new Router({
-	mode:'history',
+	mode: 'history',
 	routes
 })
 

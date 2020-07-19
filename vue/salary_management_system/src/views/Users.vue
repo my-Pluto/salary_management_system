@@ -9,7 +9,7 @@
 								<i class="el-icon-s-custom"></i>
 								<span slot="title">用户查询</span>
 							</el-menu-item>
-							<el-menu-item index="/users/adduser">
+							<el-menu-item index="/users/newuser">
 								<i class="el-icon-circle-plus-outline"></i>
 								<span slot="title">新增用户</span>
 							</el-menu-item>
