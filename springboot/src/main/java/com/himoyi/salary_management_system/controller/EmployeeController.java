@@ -2,8 +2,11 @@ package com.himoyi.salary_management_system.controller;
 
 
 import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.himoyi.salary_management_system.common.Result;
 import com.himoyi.salary_management_system.common.dto.EmployeeDto;
+import com.himoyi.salary_management_system.common.dto.UserDto;
 import com.himoyi.salary_management_system.pojo.Department;
 import com.himoyi.salary_management_system.pojo.Employee;
 import com.himoyi.salary_management_system.service.EmployeeService;
@@ -35,6 +38,14 @@ public class EmployeeController {
     public Result getEmployees() {
         List<Employee> employees = employeeService.list();
         return Result.success("查询成功！", employees);
+    }
+
+    @GetMapping("/employees/{page}/{size}")
+    @RequiresAuthentication
+    public Result getUsersPage(@PathVariable(name = "page") Integer page, @PathVariable(name = "size") Integer size) {
+        Page<Employee> employeePage = new Page<>(page, size);
+        Page<Employee> employees = employeeService.selectPage(employeePage);
+        return Result.success("查询成功！", employeePage);
     }
 
     @GetMapping("/{id}")

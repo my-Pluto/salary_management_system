@@ -1,6 +1,7 @@
 package com.himoyi.salary_management_system.controller;
 
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2020-07-17
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/operation")
 public class OperationController {
 

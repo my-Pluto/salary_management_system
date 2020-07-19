@@ -1,5 +1,6 @@
 package com.himoyi.salary_management_system.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.himoyi.salary_management_system.pojo.Employee;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -12,5 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2020-07-17
  */
 public interface EmployeeService extends IService<Employee> {
-
+    Page<Employee> selectPage(Page<Employee> page);
 }
