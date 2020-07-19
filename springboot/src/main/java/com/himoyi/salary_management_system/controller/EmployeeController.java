@@ -74,7 +74,6 @@ public class EmployeeController {
     @RequiresAuthentication
     public Result getEmployees(@RequestBody EmployeeDto employeeDto) {
         Map<String, Object> map = BeanUtil.beanToMap(employeeDto, false, true);
-        System.out.println(map);
         List<Employee> departments = employeeService.listByMap(map);
         return Result.success("查询成功！", departments);
     }
@@ -89,7 +88,8 @@ public class EmployeeController {
 
     @PostMapping
     @RequiresAuthentication
-    public Result addEmployee(@Validated Employee employee) {
+    public Result addEmployee(@Validated @RequestBody Employee employee) {
+        System.out.println(employee);
         employeeService.save(employee);
         return Result.success("添加员工成功！", null);
     }
