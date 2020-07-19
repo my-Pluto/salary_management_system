@@ -52,7 +52,7 @@ public class EmployeeController {
     public Result getUsersPage(@PathVariable(name = "page") Integer page, @PathVariable(name = "size") Integer size) {
         Page<Employee> employeePage = new Page<>(page, size);
         Page<Employee> employees = employeeService.selectPage(employeePage);
-        return Result.success("查询成功！", employeePage);
+        return Result.success("查询成功！", employees);
     }
 
     @GetMapping("/{id}")
