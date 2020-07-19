@@ -3,6 +3,8 @@ package com.himoyi.salary_management_system.controller;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.himoyi.salary_management_system.common.Result;
 import com.himoyi.salary_management_system.common.dto.UserDto;
 import com.himoyi.salary_management_system.pojo.Employee;
@@ -27,6 +29,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/user")
+@CrossOrigin
 public class UserController {
 
     @Autowired
@@ -42,6 +45,14 @@ public class UserController {
     public Result getUsers() {
         List<UserDto> users = userService.selectUsers();
         return Result.success("查询成功", users);
+    }
+
+    @GetMapping("/users/{page}/{size}")
+    @RequiresAuthentication
+    public Result getUsersPage(@PathVariable(name = "page") Integer page, @PathVariable(name = "size") Integer size) {
+        IPage<UserDto> userPage = new Page<>(page, size);
+        IPage<UserDto> users = userService.selectPage(userPage);
+        return Result.success("查询成功！", users);
     }
 
     /**
@@ -83,10 +94,12 @@ public class UserController {
     @PostMapping("{id}")
     @RequiresAuthentication
     public Result updateUser(@Validated @RequestBody User user) {
+        System.out.println(user);
         User user1 = userService.getById(user.getId());
         if (user1 == null) {
             return Result.fail("更新失败！该用户不存在", null);
         }
+        System.out.println(user);
         userService.updateById(user);
         return Result.success("更新用户信息成功", null);
     }

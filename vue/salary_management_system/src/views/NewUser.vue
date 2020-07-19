@@ -112,7 +112,7 @@
 					name: this.userName.name,
 					password: 'e10adc3949ba59abbe56e057f20f883e'
 				}).then(res => {
-					if (res.data.code = '200') {
+					if (res.data.code == '200') {
 						this.$message({
 							type: 'success',
 							message: res.data.msg,

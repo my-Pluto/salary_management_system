@@ -3,6 +3,8 @@ package com.himoyi.salary_management_system.service;
 import com.himoyi.salary_management_system.pojo.Department;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface DepartmentService extends IService<Department> {
 
+    List<String> getProvinces();
 }

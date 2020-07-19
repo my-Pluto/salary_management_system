@@ -1,5 +1,7 @@
 package com.himoyi.salary_management_system.mapper;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.himoyi.salary_management_system.common.dto.UserDto;
 import com.himoyi.salary_management_system.pojo.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -22,4 +24,6 @@ public interface UserMapper extends BaseMapper<User> {
     List<UserDto> selectUsers();
 
     UserDto selectUserById(@Param("id") Long id);
+
+    IPage<UserDto> selectPage(IPage<UserDto> page);
 }

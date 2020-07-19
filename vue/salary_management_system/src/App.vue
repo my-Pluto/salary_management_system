@@ -31,7 +31,7 @@
 		<el-dialog title="提示" :visible.sync="dialogVisible" width="30%">
 			<span>是否退出系统？</span>
 			<span slot="footer" class="dialog-footer">
-				<el-button @click="dialogVisible = false">取 消</el-button>
+				<el-button @click="notExit">取 消</el-button>
 				<el-button type="primary" @click="exitSystem" v-loading.fullscreen.lock="fullscreenLoading">确 定</el-button>
 			</span>
 		</el-dialog>
@@ -40,6 +40,7 @@
 </template>
 
 <script>
+	import md5 from 'js-md5';
 	export default {
 		name: 'app',
 		data() {
@@ -58,7 +59,44 @@
 					this.dialogVisible = true;
 					return;
 				}
+				if (key == '/user/password') {
+					this.updatePassword();
+					return;
+				}
 				this.$router.push(key);
+			},
+
+			updatePassword() {
+				this.$prompt('请输入新密码（仅包含数字和字母）', '提示', {
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+					inputPattern: /^[a-zA-Z0-9]+$/,
+					inputErrorMessage: '密码格式不正确'
+				}).then(({
+					value
+				}) => {
+					console.log(md5(value));
+					
+					this.$axios.post("http://localhost:8081/user/" + this.$store.state.userInfo.id, {
+						id: this.$store.state.userInfo.id,
+						name: this.$store.state.userInfo.name,
+						password: md5(value)
+					}).then(res => {
+						if (res.data.code == '200') {
+							this.$message({
+								type: 'success',
+								message: '修改密码成功！'
+							});
+							location.reload();
+						}
+					})
+				}).catch(() => {
+					this.$message({
+						type: 'info',
+						message: '取消输入'
+					});
+					location.reload();
+				});
 			},
 			exitSystem() {
 				this.fullscreenLoading = true;
@@ -87,6 +125,10 @@
 					}
 				})
 			},
+			notExit() {
+				this.dialogVisible = false
+									location.reload();
+			}
 		},
 
 		created() {

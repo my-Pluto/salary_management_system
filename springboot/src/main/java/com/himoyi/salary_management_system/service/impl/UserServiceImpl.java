@@ -1,5 +1,7 @@
 package com.himoyi.salary_management_system.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.himoyi.salary_management_system.common.dto.UserDto;
 import com.himoyi.salary_management_system.pojo.User;
 import com.himoyi.salary_management_system.mapper.UserMapper;
@@ -34,4 +36,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return userMapper.selectUserById(id);
     }
 
+    @Override
+    public IPage<UserDto> selectPage(IPage<UserDto> page) {
+        return userMapper.selectPage(page);
+    }
 }

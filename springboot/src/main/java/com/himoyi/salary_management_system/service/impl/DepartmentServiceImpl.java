@@ -4,7 +4,10 @@ import com.himoyi.salary_management_system.pojo.Department;
 import com.himoyi.salary_management_system.mapper.DepartmentMapper;
 import com.himoyi.salary_management_system.service.DepartmentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -17,4 +20,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Department> implements DepartmentService {
 
+    @Autowired
+    DepartmentMapper departmentMapper;
+
+    public List<String> getProvinces() {
+        return  departmentMapper.getProvinces();
+    }
 }

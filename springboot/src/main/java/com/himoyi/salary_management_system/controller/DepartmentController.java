@@ -2,6 +2,7 @@ package com.himoyi.salary_management_system.controller;
 
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +31,7 @@ import java.util.Map;
  * @since 2020-07-17
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/department")
 public class DepartmentController {
 
@@ -46,6 +49,19 @@ public class DepartmentController {
         return Result.success("查询成功！", departments);
     }
 
+    @GetMapping("/departments/provinces")
+    @RequiresAuthentication
+    public Result getProvinces() {
+        List<String> provinces = departmentService.getProvinces();
+        List<Map<String, String>> list = new ArrayList<>();
+        for (String province : provinces) {
+            Map<String, String> map = MapUtil.newHashMap();
+            map.put("value", province);
+            map.put("label", province);
+            list.add(map);
+        }
+        return Result.success("查询成功！", list);
+    }
     /**
      * 根据id查询部门
      * @param id

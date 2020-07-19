@@ -1,5 +1,7 @@
 package com.himoyi.salary_management_system.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.himoyi.salary_management_system.common.dto.UserDto;
 import com.himoyi.salary_management_system.pojo.User;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -16,7 +18,9 @@ import java.util.List;
  */
 public interface UserService extends IService<User> {
 
-    public List<UserDto> selectUsers();
+    List<UserDto> selectUsers();
 
-    public UserDto selectUserById(Long id);
+    UserDto selectUserById(Long id);
+
+    IPage<UserDto> selectPage(IPage<UserDto> page);
 }

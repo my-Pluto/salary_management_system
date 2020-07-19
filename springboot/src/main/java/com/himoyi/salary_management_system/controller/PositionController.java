@@ -23,6 +23,7 @@ import java.util.Map;
  * @since 2020-07-17
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/position")
 public class PositionController {
 
@@ -41,6 +42,7 @@ public class PositionController {
     public Result getPositions(@RequestBody PositionDto positionDto) {
         Map<String, Object> map = BeanUtil.beanToMap(positionDto, false, true);
 
+        System.out.println(positionDto);
         List<Position> positions = positionService.listByMap(map);
         return Result.success("查询成功！", positions);
     }
