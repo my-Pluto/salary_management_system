@@ -3,9 +3,9 @@ import Router from 'vue-router'
 
 import Login from '../views/Login.vue'
 import Index from '../views/Index.vue'
-import Users from '../views/Users.vue'
-import UsersData from '../views/UsersData.vue'
-import NewUser from '../views/NewUser.vue'
+import Users from '../views/User/Users.vue'
+import UsersData from '../views/User/UsersData.vue'
+import NewUser from '../views/User/NewUser.vue'
 
 Vue.use(Router)
 
