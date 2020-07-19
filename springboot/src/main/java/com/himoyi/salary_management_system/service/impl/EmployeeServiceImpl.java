@@ -1,6 +1,9 @@
 package com.himoyi.salary_management_system.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.himoyi.salary_management_system.common.dto.EmployeeDto;
+import com.himoyi.salary_management_system.common.dto.EmployeesDto;
 import com.himoyi.salary_management_system.pojo.Employee;
 import com.himoyi.salary_management_system.mapper.EmployeeMapper;
 import com.himoyi.salary_management_system.service.EmployeeService;
@@ -25,5 +28,10 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
     @Override
     public Page<Employee> selectPage(Page<Employee> page) {
         return employeeMapper.selectPage(page, null);
+    }
+
+    @Override
+    public IPage<EmployeesDto> selectEmployeePage(Page<EmployeeDto> page, EmployeeDto employeeDto) {
+        return employeeMapper.selectEmployeePage(page, employeeDto);
     }
 }

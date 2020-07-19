@@ -106,7 +106,6 @@
 			},
 			addUser() {
 				this.visible = false;
-				console.log(this.userName);
 				this.$axios.post("http://localhost:8081/user", {
 					id: this.employeeValue,
 					name: this.userName.name,
