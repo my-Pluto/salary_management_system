@@ -1,3 +1,10 @@
+<!--
+ * @FileDescription: 用户侧边导航栏组件
+ * @Author: 陈辰
+ * @Date: 
+ * @LastEditors: 陈辰
+ * @LastEditTime:
+-->
 <template>
 	<div>
 		<el-container>
@@ -29,17 +36,23 @@
 		name: 'Users',
 		data() {
 			return {
-				activeIndex: this.$route.path
+				activeIndex: this.$route.path//激活的菜单项的值
 			}
 		},
 		methods: {
+			/**
+			 * @description 点击侧边菜单触发，导向key值对应的路由的组件进行显示
+			 * @param {Object} key
+			 * @param {Object} keyPath
+			 * @return {void}
+			 */
 			handleOpen(key, keyPath) {
 				this.$router.push(key);
 			},
-			handleClose(key, keyPath) {
-				console.log(key, keyPath);
-			}
 		},
+		/**
+		 * @description 组件创建时触发，导向usersdata组件
+		 */
 		created() {
 			this.activeIndex = '/users/usersdata';
 			this.$router.push("/users/usersdata");

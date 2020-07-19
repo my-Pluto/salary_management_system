@@ -1,3 +1,10 @@
+<!--
+ * @FileDescription: 用户添加页面
+ * @Author: 陈辰
+ * @Date: 
+ * @LastEditors: 陈辰
+ * @LastEditTime:
+-->
 <template>
 	<div>
 		<el-row :gutter="20" style="margin-top: 100px; margin-left: 300px;">
@@ -6,7 +13,7 @@
 			</el-col>
 			<el-col :span="16">
 				<div class="grid-content bg-purple" style="margin-left: 25px;">
-					<el-select v-model="provinceValue" style="width: 250px;" filterable placeholder="请选择添加员工所在城市" @change="getDepartment">
+					<el-select v-model="provinceValue" style="width: 250px;" filterable placeholder="请选择添加员工所在城市" @change="getProvence">
 						<el-option v-for="item in provinces" :key="item.value" :label="item.label" :value="item.value">
 						</el-option>
 					</el-select>
@@ -22,7 +29,7 @@
 			</el-col>
 			<el-col :span="16" style="margin-left: 25px;">
 				<div class="grid-content bg-purple">
-					<el-select v-model="departmentValue" style="width: 250px;" filterable placeholder="请选择添加员工所在部门" @change="getEmployee">
+					<el-select v-model="departmentValue" style="width: 250px;" filterable placeholder="请选择添加员工所在部门" @change="getDepartment">
 						<el-option v-for="item in departments" :key="item.id" :label="item.name" :value="item.id">
 						</el-option>
 					</el-select>
@@ -38,7 +45,7 @@
 			</el-col>
 			<el-col :span="16" style="margin-left: 25px;">
 				<div class="grid-content bg-purple">
-					<el-select v-model="employeeValue" style="width: 250px;" filterable placeholder="请选择添加的员工" @change="getUser">
+					<el-select v-model="employeeValue" style="width: 250px;" filterable placeholder="请选择添加的员工" @change="getEmployee">
 						<el-option v-for="item in emloyees" :key="item.id" :label="item.name" :value="item.id">
 						</el-option>
 					</el-select>
@@ -64,18 +71,22 @@
 		name: 'NewUser',
 		data() {
 			return {
-				visible: false,
-				provinces: [],
-				provinceValue: '',
-				departments: [],
-				departmentValue: '',
-				emloyees: [],
-				employeeValue: '',
-				userName: 'aaa',
+				visible: false,//弹出框绑定的布尔值，true显示，false消失
+				provinces: [],//用户所在城市列表
+				provinceValue: '',//用户所在城市选择器绑定的值
+				departments: [],//用户所在部门列表
+				departmentValue: '',//用户所在部门选择器绑定的值
+				emloyees: [],//用户名字列表
+				employeeValue: '',//用户名字选择器绑定的值
+				userName: 'aaa',//选中用户的名字
 			}
 		},
 		methods: {
-			getDepartment() {
+			/**
+			 * @description 用户所在城市选择器选中值发生改变时触发，从后端获得数据填入部门列表
+			 * @return {void}
+			 */
+			getProvence() {
 				this.departments = [];
 				this.departmentValue = '';
 				this.emloyees = [];
@@ -86,8 +97,11 @@
 					this.departments = res.data.data;
 				})
 			},
-
-			getEmployee() {
+			/**
+			 * @description 用户所在部门选择器选中值发生变化时触发，从后端获得数据填入用户列表
+			 * @return {void}
+			 */
+			getDepartment() {
 				this.emloyees = [];
 				this.employeeValue = '';
 				this.$axios.post("http://localhost:8081/employee/employees", {
@@ -96,14 +110,21 @@
 					this.emloyees = res.data.data;
 				})
 			},
-
-			getUser() {
+			/**
+			 * @description 用户名字选择器选中值发生变化时触发，从后端获得数据给userName赋值
+			 * @return {void}
+			 */
+			getEmployee() {
 				const _this = this;
 				this.$axios.get("http://localhost:8081/employee/" + this.employeeValue ).then(res => {
 
-					_this.userName = res.data.data;
+					this.userName = res.data.data;
 				});
 			},
+			/**
+			 * @description 点击弹出框确定后触发，添加用户成功显示成功消息，失败显示失败消息
+			 * @return {void}
+			 */
 			addUser() {
 				this.visible = false;
 				console.log(this.userName);
@@ -129,6 +150,10 @@
 
 			}
 		},
+		/**
+		 * @description 组件创建时触发，从后端获得数据填入城市列表中
+		 * @return {void}
+		 */
 		created() {
 			this.$parent.activeIndex = "/users/newuser";
 			this.provinces = [],
