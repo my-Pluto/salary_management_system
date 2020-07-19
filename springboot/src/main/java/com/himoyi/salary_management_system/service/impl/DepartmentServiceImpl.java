@@ -1,5 +1,9 @@
 package com.himoyi.salary_management_system.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.himoyi.salary_management_system.common.dto.DepartmentDto;
+import com.himoyi.salary_management_system.common.dto.PositionDto;
 import com.himoyi.salary_management_system.pojo.Department;
 import com.himoyi.salary_management_system.mapper.DepartmentMapper;
 import com.himoyi.salary_management_system.service.DepartmentService;
@@ -25,5 +29,15 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
 
     public List<String> getProvinces() {
         return  departmentMapper.getProvinces();
+    }
+
+    @Override
+    public IPage<Department> selectPage(IPage<Department> page) {
+        return departmentMapper.selectPage(page, null);
+    }
+
+    @Override
+    public IPage<Department> selectDepartmentPage(Page<DepartmentDto> departmentDtoPage, DepartmentDto departmentDto) {
+        return departmentMapper.selectDepartmentPage(departmentDtoPage, departmentDto);
     }
 }
