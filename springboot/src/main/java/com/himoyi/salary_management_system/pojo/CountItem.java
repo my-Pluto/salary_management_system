@@ -1,6 +1,8 @@
 package com.himoyi.salary_management_system.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+
+import java.math.BigDecimal;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -54,7 +56,7 @@ public class CountItem implements Serializable {
     /**
      * 第一个运算数
      */
-    private Long firstOperand;
+    private String firstOperand;
 
     /**
      * 运算符
@@ -64,7 +66,7 @@ public class CountItem implements Serializable {
     /**
      * 第二个运算数
      */
-    private Long secentOperand;
+    private BigDecimal secentOperand;
 
     /**
      * 版本信息

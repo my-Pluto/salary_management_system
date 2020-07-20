@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.himoyi.salary_management_system.mapper.ImportItemMapper">
 
-    <select id="selectFixedItemPage" parameterType="com.himoyi.salary_management_system.common.dto.ImportItemDto"
+    <select id="selectImportItemPage" parameterType="com.himoyi.salary_management_system.common.dto.ImportItemDto"
             resultType="com.himoyi.salary_management_system.common.dto.ImportItemDto">
         SELECT * FROM import_item
         <where>

@@ -2,4 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.himoyi.salary_management_system.mapper.CountItemMapper">
 
+    <select id="selectCountItemPage" parameterType="com.himoyi.salary_management_system.common.dto.CountItemDto"
+            resultType="com.himoyi.salary_management_system.common.dto.CountItemDto">
+        SELECT * FROM count_item
+        <where>
+            <if test="countItemDto != null">
+                <if test="countItemDto.id != null">
+                    AND count_item.`id` = #{countItemDto.id}
+                </if>
+                <if test="countItemDto.name != null and countItemDto.name != ''">
+                    AND count_item.name = #{countItemDto.name}
+                </if>
+                <if test="countItemDto.effect != null and countItemDto.effect != ''">
+                    AND count_item.effect = #{countItemDto.effect}
+                </if>
+                <if test="countItemDto.number != null and countItemDto.number != ''">
+                    AND count_item.number = #{countItemDto.number}
+                </if>
+                <if test="countItemDto.isDisplay != null and countItemDto.isDisplay != ''">
+                    AND count_item.isDisplay = #{countItemDto.isDisplay}
+                </if>
+            </if>
+        </where>
+    </select>
 </mapper>
