@@ -2,4 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.himoyi.salary_management_system.mapper.FixedItemMapper">
 
+    <select id="selectFixedItemPage" parameterType="com.himoyi.salary_management_system.common.dto.FixedItemDto"
+            resultType="com.himoyi.salary_management_system.common.dto.FixedItemDto">
+        SELECT * FROM fixed_item
+        <where>
+            <if test="fixedItemDto != null">
+                <if test="fixedItemDto.id != null">
+                    AND fixed_item.`id` = #{fixedItemDto.id}
+                </if>
+                <if test="fixedItemDto.name != null and fixedItemDto.name != ''">
+                    AND fixed_item.name = #{fixedItemDto.name}
+                </if>
+                <if test="fixedItemDto.effect != null and fixedItemDto.effect != ''">
+                    AND fixed_item.effect = #{fixedItemDto.effect}
+                </if>
+                <if test="fixedItemDto.number != null and fixedItemDto.number != ''">
+                    AND fixed_item.number = #{fixedItemDto.number}
+                </if>
+                <if test="fixedItemDto.isDisplay != null and fixedItemDto.isDisplay != ''">
+                    AND fixed_item.isDisplay = #{fixedItemDto.isDisplay}
+                </if>
+            </if>
+        </where>
+    </select>
 </mapper>

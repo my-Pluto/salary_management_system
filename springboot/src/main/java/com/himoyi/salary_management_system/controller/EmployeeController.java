@@ -89,7 +89,6 @@ public class EmployeeController {
     @PostMapping
     @RequiresAuthentication
     public Result addEmployee(@Validated @RequestBody Employee employee) {
-        System.out.println(employee);
         employeeService.save(employee);
         return Result.success("添加员工成功！", null);
     }
