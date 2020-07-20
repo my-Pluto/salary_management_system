@@ -1,5 +1,9 @@
 package com.himoyi.salary_management_system.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.himoyi.salary_management_system.common.dto.PositionDto;
+import com.himoyi.salary_management_system.common.dto.UserDto;
 import com.himoyi.salary_management_system.pojo.Position;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +17,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface PositionService extends IService<Position> {
 
+    IPage<Position> selectPage(IPage<Position> page);
+
+    IPage<Position> selectPositionPage(Page<PositionDto> positionPage, PositionDto positionDto);
 }

@@ -7,10 +7,18 @@ import cn.hutool.core.map.MapUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.himoyi.salary_management_system.common.Result;
 import com.himoyi.salary_management_system.common.dto.DepartmentDto;
+import com.himoyi.salary_management_system.common.dto.PositionDto;
 import com.himoyi.salary_management_system.pojo.Department;
+import com.himoyi.salary_management_system.pojo.Employee;
+import com.himoyi.salary_management_system.pojo.Position;
 import com.himoyi.salary_management_system.service.DepartmentService;
+import com.himoyi.salary_management_system.service.EmployeeService;
+import com.himoyi.salary_management_system.service.PositionService;
+import javafx.geometry.Pos;
 import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +45,10 @@ public class DepartmentController {
 
     @Autowired
     DepartmentService departmentService;
+    @Autowired
+    PositionService positionService;
+    @Autowired
+    EmployeeService employeeService;
 
     /**
      * 查询所有部门
@@ -46,6 +58,14 @@ public class DepartmentController {
     @RequiresAuthentication
     public Result getDepartments() {
         List<Department> departments = departmentService.list();
+        return Result.success("查询成功！", departments);
+    }
+
+    @GetMapping("/departments/{page}/{size}")
+    @RequiresAuthentication
+    public Result getUsersPage(@PathVariable(name = "page") Integer page, @PathVariable(name = "size") Integer size) {
+        Page<Department>departmentPage = new Page<>(page, size);
+        IPage<Department> departments = departmentService.selectPage(departmentPage);
         return Result.success("查询成功！", departments);
     }
 
@@ -88,6 +108,14 @@ public class DepartmentController {
         Map<String, Object> map = BeanUtil.beanToMap(departmentDto, false, true);
         List<Department> departments = departmentService.listByMap(map);
         return Result.success("查询成功！", departments);
+    }
+
+    @PostMapping("/department/{page}/{size}")
+    @RequiresAuthentication
+    public Result getPositionsPage(@RequestBody DepartmentDto departmentDto,
+                                   @PathVariable(name = "page") Integer page, @PathVariable(name = "size") Integer size) {
+        IPage<Department> positions =departmentService.selectDepartmentPage(new Page<DepartmentDto>(page, size), departmentDto);
+        return Result.success("查询成功！", positions);
     }
 
     /**
@@ -133,6 +161,9 @@ public class DepartmentController {
     @DeleteMapping("{id}")
     @RequiresAuthentication
     public Result deleteDepartment(@PathVariable(name = "id") Long id) {
+        employeeService.remove(new QueryWrapper<Employee>().eq("department", id));
+        Department department = departmentService.getById(id);
+        positionService.remove(new QueryWrapper<Position>().eq("department", department.getName()));
         departmentService.removeById(id);
         return Result.success("删除成功！", null);
     }

@@ -2,8 +2,13 @@ package com.himoyi.salary_management_system.controller;
 
 
 import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.himoyi.salary_management_system.common.Result;
+import com.himoyi.salary_management_system.common.dto.EmployeeDto;
+import com.himoyi.salary_management_system.common.dto.EmployeesDto;
 import com.himoyi.salary_management_system.common.dto.PositionDto;
+import com.himoyi.salary_management_system.pojo.Employee;
 import com.himoyi.salary_management_system.pojo.Position;
 import com.himoyi.salary_management_system.service.PositionService;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
@@ -37,13 +42,27 @@ public class PositionController {
         return Result.success("查询成功！", positions);
     }
 
+    @GetMapping("/positions/{page}/{size}")
+    @RequiresAuthentication
+    public Result getPositions(@PathVariable(name = "page") Integer page, @PathVariable(name = "size") Integer size) {
+        Page<Position> positionPage = new Page<>(page, size);
+        IPage<Position> positions = positionService.selectPage(positionPage);
+        return Result.success("查询成功！", positions);
+    }
+
     @PostMapping("/positions")
     @RequiresAuthentication
     public Result getPositions(@RequestBody PositionDto positionDto) {
         Map<String, Object> map = BeanUtil.beanToMap(positionDto, false, true);
-
-        System.out.println(positionDto);
         List<Position> positions = positionService.listByMap(map);
+        return Result.success("查询成功！", positions);
+    }
+
+    @PostMapping("/positions/{page}/{size}")
+    @RequiresAuthentication
+    public Result getPositionsPage(@RequestBody PositionDto positionDto,
+                               @PathVariable(name = "page") Integer page, @PathVariable(name = "size") Integer size) {
+        IPage<Position> positions =positionService.selectPositionPage(new Page<PositionDto>(page, size), positionDto);
         return Result.success("查询成功！", positions);
     }
 

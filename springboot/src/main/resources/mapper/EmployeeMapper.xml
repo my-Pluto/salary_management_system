@@ -2,4 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.himoyi.salary_management_system.mapper.EmployeeMapper">
 
+    <select id="selectEmployeePage"
+            parameterType="com.himoyi.salary_management_system.common.dto.EmployeeDto"
+            resultType="com.himoyi.salary_management_system.common.dto.EmployeesDto">
+        SELECT employee.`id` id, employee.`name` NAME, department.`name` department, position.`name` POSITION,
+        employee.`email` email, employee.`entry_time` entrytime, employee.`sex` sex
+        FROM employee, department, POSITION
+        <where>
+            <if test="employeeDto != null">
+                <if test="employeeDto.id != null">
+                    AND employee.`id` = #{employeeDto.id}
+                </if>
+                <if test="employeeDto.name != null and emplpyeeDto.name != ''">
+                    AND employee.`name` = #{employeeDto.name}
+                </if>
+                <if test="employeeDto.sex != null and emplpyeeDto.sex != ''">
+                    AND employee.`sex` = #{employeeDto.sex}
+                </if>
+                <if test="employeeDto.department != null">
+                    AND employee.`department` = #{employeeDto.department}
+                </if>
+                <if test="employeeDto.position != null">
+                    AND employee.`position` = #{employeeDto.position}
+                </if>
+                <if test="employeeDto.email != null and emplpyeeDto.email != ''">
+                    AND employee.`email` = #{employeeDto.email}
+                </if>
+                <if test="employeeDto.entryTime != null">
+                    AND employee.`entryTime` = #{employeeDto.entryTime}
+                </if>
+            </if>
+        </where>
+        AND employee.`department` = department.`id` AND position.`id` = employee.`position`
+    </select>
+
 </mapper>

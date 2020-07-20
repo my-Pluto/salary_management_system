@@ -2,4 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.himoyi.salary_management_system.mapper.DepartmentMapper">
 
+    <select id="selectDepartmentPage" parameterType="com.himoyi.salary_management_system.common.dto.DepartmentDto"
+            resultType="com.himoyi.salary_management_system.pojo.Department">
+        SELECT * FROM department
+        <where>
+            <if test="departmentDto != null">
+                <if test="departmentDto.id != null">
+                    AND department.`id` = #{departmentDto.id}
+                </if>
+                <if test="departmentDto.name != null and departmentDto.name != ''">
+                    AND department.name = #{departmentDto.name}
+                </if>
+                <if test="departmentDto.province != null and departmentDto.province != ''">
+                    AND department.province = #{departmentDto.province}
+                </if>
+            </if>
+        </where>
+    </select>
 </mapper>

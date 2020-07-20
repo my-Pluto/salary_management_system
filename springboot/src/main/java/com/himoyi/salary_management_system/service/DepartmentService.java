@@ -1,5 +1,10 @@
 package com.himoyi.salary_management_system.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.himoyi.salary_management_system.common.dto.DepartmentDto;
+import com.himoyi.salary_management_system.common.dto.PositionDto;
+import com.himoyi.salary_management_system.common.dto.UserDto;
 import com.himoyi.salary_management_system.pojo.Department;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -16,4 +21,8 @@ import java.util.List;
 public interface DepartmentService extends IService<Department> {
 
     List<String> getProvinces();
+
+    IPage<Department> selectPage(IPage<Department> page);
+
+    IPage<Department> selectDepartmentPage(Page<DepartmentDto> departmentDtoPagePage, DepartmentDto departmentDto);
 }
