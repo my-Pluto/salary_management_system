@@ -1,5 +1,8 @@
 package com.himoyi.salary_management_system.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.himoyi.salary_management_system.common.dto.ImportItemDto;
 import com.himoyi.salary_management_system.pojo.ImportItem;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +16,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ImportItemService extends IService<ImportItem> {
 
+    IPage<ImportItem> selectPage(Page<ImportItem> importItemPage);
+
+    IPage<ImportItemDto> selectImportItemPage(Page<ImportItemDto> importItemDtoPage, ImportItemDto importItemDto);
 }

@@ -62,7 +62,10 @@ public class FixedItemController {
     @PostMapping
     @RequiresAuthentication
     public Result addFixedItem(@RequestBody FixedItem fixedItem) {
-        fixedItemService.save(fixedItem);
+        if (fixedItemService.getOne(new QueryWrapper<FixedItem>().eq("name", fixedItem.getName())) == null) {
+            return Result.fail("添加失败！该项目已存在！", null);
+        }
+            fixedItemService.save(fixedItem);
         return Result.success("添加成功!", null);
     }
 

@@ -2,4 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.himoyi.salary_management_system.mapper.ImportItemMapper">
 
+    <select id="selectFixedItemPage" parameterType="com.himoyi.salary_management_system.common.dto.ImportItemDto"
+            resultType="com.himoyi.salary_management_system.common.dto.ImportItemDto">
+        SELECT * FROM import_item
+        <where>
+            <if test="importItemDto != null">
+                <if test="importItemDto.id != null">
+                    AND import_item.`id` = #{importItemDto.id}
+                </if>
+                <if test="fimportItemDto.name != null and importItemDto.name != ''">
+                    AND import_item.name = #{importItemDto.name}
+                </if>
+                <if test="importItemDto.effect != null and importItemDto.effect != ''">
+                    AND import_item.effect = #{importItemDto.effect}
+                </if>
+                <if test="importItemDto.number != null and importItemDto.number != ''">
+                    AND import_item.number = #{importItemDto.number}
+                </if>
+                <if test="importItemDto.isDisplay != null and importItemDto.isDisplay != ''">
+                    AND import_item.isDisplay = #{importItemDto.isDisplay}
+                </if>
+            </if>
+        </where>
+    </select>
 </mapper>
