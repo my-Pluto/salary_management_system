@@ -6,6 +6,9 @@ import Index from '../views/Index.vue'
 import Users from '../views/User/Users.vue'
 import UsersData from '../views/User/UsersData.vue'
 import NewUser from '../views/User/NewUser.vue'
+import Department from '../views/Department/Department.vue'
+import DepartmentData from '../views/Department/DepartmentData.vue'
+import NewDepartment from '../views/Department/NewDepartment.vue'
 
 Vue.use(Router)
 
@@ -50,6 +53,30 @@ const routes = [{
 				}
 			}
 		]
+	},
+	{
+		path: '/department',
+		name:'department',
+		component: Department,
+		meta: {
+			requireAuth: true
+		},
+		children: [{
+			path: 'departmentdata',
+			name: 'departmentdata',
+			component: DepartmentData,
+			meta: {
+				requireAuth: true
+			}
+		},
+		{
+			path: 'newdepartment',
+			name:'newdepartment',
+			component: NewDepartment,
+			meta: {
+				requireAuth: true
+			}
+		}]
 	}
 ]
 
