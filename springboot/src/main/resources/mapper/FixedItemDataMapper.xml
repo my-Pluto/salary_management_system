@@ -25,4 +25,32 @@
             </if>
         </where>
     </select>
+
+    <select id="getEmployee_id" parameterType="com.himoyi.salary_management_system.common.dto.FixedItemDataDto"
+            resultType="java.lang.Long">
+        SELECT employee_id FROM fixed_item_data
+        <where>
+            <if test="fixedItemDataDto != null">
+                <if test="fixedItemDataDto.id != null">
+                    AND fixed_item_data.`id` = #{fixedItemDataDto.id}
+                </if>
+                <if test="fixedItemDataDto.name != null and fixedItemDataDto.name != ''">
+                    AND fixed_item_data.name = #{fixedItemDataDto.name}
+                </if>
+                <if test="fixedItemDataDto.deptName != null and fixedItemDataDto.deptName != ''">
+                    AND fixed_item_data.dept_name = #{fixedItemDataDto.deptName}
+                </if>
+                <if test="fixedItemDataDto.employeeId != null and fixedItemDataDto.employeeId != ''">
+                    AND fixed_item_data.employee_id = #{fixedItemDataDto.employeeId}
+                </if>
+                <if test="fixedItemDataDto.employeeName != null and fixedItemDataDto.employeeName != ''">
+                    AND fixed_item_data.employee_name = #{fixedItemDataDto.employeeName}
+                </if>
+                <if test="fixedItemDataDto.lowSalary != null and fixedItemDataDto.highSalary != null">
+                    AND fixed_item_data.salary BETWEEN #{fixedItemDataDto.lowSalary} and #{fixedItemDataDto.highSalary}
+                </if>
+            </if>
+        </where>
+        GROUP BY employee_id
+    </select>
 </mapper>

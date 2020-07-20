@@ -1,10 +1,18 @@
 package com.himoyi.salary_management_system.controller;
 
 
+import com.himoyi.salary_management_system.common.Result;
+import com.himoyi.salary_management_system.pojo.ImportItemData;
+import com.himoyi.salary_management_system.service.ImportItemDataService;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -16,8 +24,17 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("/import-item-data")
+@RequestMapping("/importitemdata")
 public class ImportItemDataController {
+
+    @Autowired
+    ImportItemDataService importItemDataService;
+
+//    @GetMapping
+//    @RequiresAuthentication
+//    public Result getImportItemData() {
+//        List<ImportItemData>
+//    }
 
 }
 

@@ -51,18 +51,17 @@ public class FixedItemDataController {
     @GetMapping("/fixeditemdata/{page}/{size}")
     @RequiresAuthentication
     public Result getFixedItemData(@PathVariable(name = "page") Integer page, @PathVariable(name = "size") Integer size){
-        IPage<FixedItemData> fixedItemIPage = fixedItemDataService.selectPage(new Page<FixedItemData>(page, size));
-        return Result.success("查询成功！", fixedItemIPage);
+        List<Object> list = fixedItemDataService.getData(page, size, null);
+        return Result.success("查询成功！", list);
     }
 
     @PostMapping("/fixeditemdata/{page}/{size}")
     @RequiresAuthentication
     public Result getFixedItemDataByData(@RequestBody FixedItemDataDto fixedItemDataDto,
                                          @PathVariable(name = "page") Integer page, @PathVariable(name = "size") Integer size) {
-        IPage<FixedItemData> fixedItemDataIPage = fixedItemDataService.
-                selectFixedItemPage(new Page<FixedItemDataDto>(page, size), fixedItemDataDto);
+        List<Object> list = fixedItemDataService.getData(page, size, null);
 
-        return Result.success("查询成功！", fixedItemDataIPage);
+        return Result.success("查询成功！", list);
     }
 
     @PostMapping("/fixeditemdata")

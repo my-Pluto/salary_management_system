@@ -7,6 +7,10 @@ import com.himoyi.salary_management_system.pojo.FixedItemData;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * <p>
@@ -18,6 +22,14 @@ import org.apache.ibatis.annotations.Param;
  */
 @Mapper
 public interface FixedItemDataMapper extends BaseMapper<FixedItemData> {
+
+    @Select("SELECT NAME FROM fixed_item_data GROUP BY NAME")
+    List<String> getName();
+
+    List<Long> getEmployee_id(@Param("fixedItemDataDto") FixedItemDataDto fixedItemDataDto);
+
+    @Select("SELECT salary FROM fixed_item_data WHERE employee_id = #{id} AND name = #{name}")
+    BigDecimal getSalary(@Param("id") Long id, @Param("name") String name);
 
     IPage<FixedItemData> selectFixedItemPage(Page<FixedItemDataDto> fixedItemDataDtoPage,
                                              @Param("fixedItemDataDto") FixedItemDataDto fixedItemDataDto);

@@ -2,8 +2,13 @@ package com.himoyi.salary_management_system;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.himoyi.salary_management_system.common.dto.EmployeeDto;
+import com.himoyi.salary_management_system.common.dto.FixedItemDataDto;
+import com.himoyi.salary_management_system.mapper.FixedItemDataMapper;
+import com.himoyi.salary_management_system.mapper.FixedItemMapper;
 import com.himoyi.salary_management_system.pojo.Employee;
+import com.himoyi.salary_management_system.pojo.FixedItemData;
 import com.himoyi.salary_management_system.service.EmployeeService;
+import com.himoyi.salary_management_system.service.FixedItemDataService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +21,11 @@ public class BeanTest {
     @Autowired
     EmployeeService employeeService;
 
+    @Autowired
+    FixedItemDataMapper fixedItemDataMapper;
+
+    @Autowired
+    FixedItemDataService fixedItemDataService;
     @Test
     public void beanTest() {
         Employee employee = new Employee();
@@ -30,5 +40,10 @@ public class BeanTest {
         System.out.println(employee);
 
         employeeService.save(employee);
+    }
+
+    @Test
+    public void sqlTest() {
+        System.out.println(fixedItemDataService.getData(1, 5, null));
     }
 }
