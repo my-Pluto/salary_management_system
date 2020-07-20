@@ -2,4 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.himoyi.salary_management_system.mapper.FixedItemDataMapper">
 
+    <select id="selectFixedItemPage" parameterType="com.himoyi.salary_management_system.common.dto.FixedItemDataDto"
+            resultType="com.himoyi.salary_management_system.pojo.FixedItemData">
+        SELECT * FROM fixed_item_data
+        <where>
+            <if test="fixedItemDataDto != null">
+                <if test="fixedItemDataDto.id != null">
+                    AND fixed_item_data.`id` = #{fixedItemDataDto.id}
+                </if>
+                <if test="fixedItemDataDto.name != null and fixedItemDataDto.name != ''">
+                    AND fixed_item_data.name = #{fixedItemDataDto.name}
+                </if>
+                <if test="fixedItemDataDto.deptName != null and fixedItemDataDto.deptName != ''">
+                    AND fixed_item_data.deptName = #{fixedItemDataDto.deptName}
+                </if>
+                <if test="fixedItemDataDto.employeeId != null and fixedItemDataDto.employeeId != ''">
+                    AND fixed_item_data.employeeId = #{fixedItemDataDto.employeeId}
+                </if>
+                <if test="fixedItemDataDto.lowSalary != null and fixedItemDataDto.highSalary != null">
+                    AND fixed_item_data.salary BETWEEN #{fixedItemDataDto.lowSalary} and #{fixedItemDataDto.highSalary}
+                </if>
+            </if>
+        </where>
+    </select>
 </mapper>
