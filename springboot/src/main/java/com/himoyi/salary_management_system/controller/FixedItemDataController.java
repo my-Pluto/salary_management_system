@@ -59,7 +59,7 @@ public class FixedItemDataController {
     @RequiresAuthentication
     public Result getFixedItemDataByData(@RequestBody FixedItemDataDto fixedItemDataDto,
                                          @PathVariable(name = "page") Integer page, @PathVariable(name = "size") Integer size) {
-        List<Object> list = fixedItemDataService.getData(page, size, null);
+        List<Object> list = fixedItemDataService.getData(page, size, fixedItemDataDto);
 
         return Result.success("查询成功！", list);
     }
