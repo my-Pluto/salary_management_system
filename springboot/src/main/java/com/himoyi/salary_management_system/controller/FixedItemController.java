@@ -21,7 +21,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author 张玉飞 陈辰 刘月锟 宫雅琦 邵景宇
@@ -46,7 +46,7 @@ public class FixedItemController {
 
     @GetMapping("/fixeditem/{page}/{size}")
     @RequiresAuthentication
-    public Result getFixedItem(@PathVariable(name = "page") Integer page, @PathVariable(name = "size") Integer size){
+    public Result getFixedItem(@PathVariable(name = "page") Integer page, @PathVariable(name = "size") Integer size) {
         IPage<FixedItem> fixedItemIPage = fixedItemService.selectPage(new Page<FixedItem>(page, size));
         return Result.success("查询成功！", fixedItemIPage);
     }
@@ -65,7 +65,13 @@ public class FixedItemController {
         if (fixedItemService.getOne(new QueryWrapper<FixedItem>().eq("name", fixedItem.getName())) == null) {
             return Result.fail("添加失败！该项目已存在！", null);
         }
-            fixedItemService.save(fixedItem);
+        if (fixedItem.getIsDisplay() != 0 &&
+                fixedItemService.getOne(new QueryWrapper<FixedItem>().eq("number", fixedItem.getNumber())) != null) {
+            return Result.success("添加项目失败！工资条显示位置冲突！", null);
+        }
+        if (fixedItem.getIsDisplay() == 0)
+            fixedItem.setNumber(0);
+        fixedItemService.save(fixedItem);
         return Result.success("添加成功!", null);
     }
 
@@ -76,6 +82,13 @@ public class FixedItemController {
         if (fixedItem1 == null) {
             return Result.fail("更新失败！该固定项目不存在！", null);
         }
+
+        if (fixedItem.getIsDisplay() != 0 &&
+                fixedItemService.getOne(new QueryWrapper<FixedItem>().eq("number", fixedItem.getNumber())) != null) {
+            return Result.success("更新项目失败！工资条显示位置冲突！", null);
+        }
+        if (fixedItem.getIsDisplay() == 0)
+            fixedItem.setNumber(0);
 
         fixedItemService.saveOrUpdate(fixedItem);
         return Result.success("更新成功！", null);

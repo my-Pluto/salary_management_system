@@ -67,6 +67,11 @@ public class CountItemController {
             return Result.fail("添加失败，该项目已存在！", null);
         }
 
+        if (countItem.getIsDisplay() != 0 &&
+                countItemService.getOne(new QueryWrapper<CountItem>().eq("number", countItem.getNumber())) != null) {
+            return Result.success("更新项目失败！工资条显示位置冲突！", null);
+        }
+        
         countItemService.save(countItem);
         return Result.success("添加成功！", null);
     }
@@ -75,6 +80,10 @@ public class CountItemController {
     public Result updateCountItem(@RequestBody CountItem countItem, @PathVariable(name = "id") Long id) {
         if (countItemService.getById(id) == null) {
             return Result.fail("更新失败！该项目不存在！", null);
+        }
+        if (countItem.getIsDisplay() != 0 &&
+                countItemService.getOne(new QueryWrapper<CountItem>().eq("number", countItem.getNumber())) != null) {
+            return Result.success("更新项目失败！工资条显示位置冲突！", null);
         }
         countItemService.updateById(countItem);
         return Result.success("更新成功！", null);

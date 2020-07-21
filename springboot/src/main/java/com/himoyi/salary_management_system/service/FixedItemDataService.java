@@ -23,4 +23,6 @@ public interface FixedItemDataService extends IService<FixedItemData> {
     IPage<FixedItemData> selectFixedItemPage(Page<FixedItemDataDto> fixedItemDataPage, FixedItemDataDto fixedItemDataDto);
 
     List<Object> getData(Integer page, Integer size, FixedItemDataDto fixedItemDataDto);
+
+    void updateByEmployeeId(Object object, Long id, String name);
 }

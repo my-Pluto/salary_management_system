@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.himoyi.salary_management_system.common.Result;
 import com.himoyi.salary_management_system.common.dto.FixedItemDto;
 import com.himoyi.salary_management_system.common.dto.ImportItemDto;
+import com.himoyi.salary_management_system.pojo.FixedItem;
 import com.himoyi.salary_management_system.pojo.ImportItem;
 import com.himoyi.salary_management_system.service.ImportItemDataService;
 import com.himoyi.salary_management_system.service.ImportItemService;
@@ -64,6 +65,11 @@ public class ImportItemController {
             return Result.fail("添加失败，该项目已存在！", null);
         }
 
+        if (importItem.getIsDisplay() != 0 &&
+                importItemService.getOne(new QueryWrapper<ImportItem>().eq("number", importItem.getNumber())) != null) {
+            return Result.success("更新项目失败！工资条显示位置冲突！", null);
+        }
+
         importItemService.save(importItem);
         return Result.success("添加成功！", null);
     }
@@ -72,6 +78,10 @@ public class ImportItemController {
     public Result updateImportItem(@RequestBody ImportItem importItem, @PathVariable(name = "id") Long id) {
         if (importItemService.getById(id) == null) {
             return Result.fail("更新失败！该项目不存在！", null);
+        }
+        if (importItem.getIsDisplay() != 0 &&
+                importItemService.getOne(new QueryWrapper<ImportItem>().eq("number", importItem.getNumber())) != null) {
+            return Result.success("更新项目失败！工资条显示位置冲突！", null);
         }
         importItemService.updateById(importItem);
         return Result.success("更新成功！", null);

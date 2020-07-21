@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -33,4 +34,7 @@ public interface FixedItemDataMapper extends BaseMapper<FixedItemData> {
 
     IPage<FixedItemData> selectFixedItemPage(Page<FixedItemDataDto> fixedItemDataDtoPage,
                                              @Param("fixedItemDataDto") FixedItemDataDto fixedItemDataDto);
+
+    @Select("UPDATE fixed_item_data SET salary = #{salary} WHERE employee_id = #{id} AND name=#{name}")
+    void updateByEmployeeId(@Param("salary") Object object, @Param("id") Long id, @Param("name") String name);
 }

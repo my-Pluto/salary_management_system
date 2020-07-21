@@ -47,7 +47,7 @@ public class FixedItemDataServiceImpl extends ServiceImpl<FixedItemDataMapper, F
 
         List<String> names = fixedItemDataMapper.getName();
 
-        Integer total = ids.size() / size;
+        Integer total = ids.size() / size + 1;
         Integer first = (size * page) - size;
         int allPageNumber = ids.size();
 
@@ -76,6 +76,11 @@ public class FixedItemDataServiceImpl extends ServiceImpl<FixedItemDataMapper, F
         list.add(all);
         list.add(data);
         return list;
+    }
+
+    @Override
+    public void updateByEmployeeId(Object object, Long id, String name) {
+        fixedItemDataMapper.updateByEmployeeId(object, id, name);
     }
 
 }

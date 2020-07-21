@@ -2,6 +2,8 @@ package com.himoyi.salary_management_system.controller;
 
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -19,7 +21,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.xml.ws.soap.Addressing;
 import java.awt.geom.RectangularShape;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -78,10 +82,22 @@ public class FixedItemDataController {
                 fixedItemDataService.saveOrUpdate(fixedItemData1);
             }
         }
-        else {
-            fixedItemDataService.saveOrUpdate(fixedItemData);
+        return Result.success("批量修改成功！",null);
+    }
+
+    @PostMapping("/fixeditemdata/{employeeid}")
+    @RequiresAuthentication
+    public Result updateFixedItemDataByEmployeeId(@RequestBody String json, @PathVariable(name = "employeeid") Long id) {
+        System.out.println(json);
+        JSONObject jsonObject = JSONUtil.parseObj(json);
+        System.out.println(jsonObject.keySet());
+        Set<String> strings = jsonObject.keySet();
+        for (String string : strings) {
+            Object o = jsonObject.get(string);
+            System.out.println(o.toString());
+           fixedItemDataService.updateByEmployeeId(BigDecimal.valueOf(Double.parseDouble(o.toString())), id, string);
         }
-        return Result.success(null);
+        return Result.success("更新成功！", null);
     }
 
     @DeleteMapping("{id}")

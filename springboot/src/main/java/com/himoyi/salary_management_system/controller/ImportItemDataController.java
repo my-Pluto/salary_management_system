@@ -30,11 +30,6 @@ public class ImportItemDataController {
     @Autowired
     ImportItemDataService importItemDataService;
 
-//    @GetMapping
-//    @RequiresAuthentication
-//    public Result getImportItemData() {
-//        List<ImportItemData>
-//    }
 
 }
 
