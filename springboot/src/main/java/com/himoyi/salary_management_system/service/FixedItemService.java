@@ -7,6 +7,8 @@ import com.himoyi.salary_management_system.common.dto.UserDto;
 import com.himoyi.salary_management_system.pojo.FixedItem;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -20,4 +22,6 @@ public interface FixedItemService extends IService<FixedItem> {
     IPage<FixedItem> selectPage(IPage<FixedItem> page);
 
     IPage<FixedItemDto> selectFixedItemPage(Page<FixedItemDto> fixedItemDtoPage, FixedItemDto fixedItemDto);
+
+    List<FixedItem> getName();
 }

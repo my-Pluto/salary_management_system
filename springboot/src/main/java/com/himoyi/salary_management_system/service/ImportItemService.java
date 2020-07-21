@@ -6,6 +6,8 @@ import com.himoyi.salary_management_system.common.dto.ImportItemDto;
 import com.himoyi.salary_management_system.pojo.ImportItem;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -19,4 +21,6 @@ public interface ImportItemService extends IService<ImportItem> {
     IPage<ImportItem> selectPage(Page<ImportItem> importItemPage);
 
     IPage<ImportItemDto> selectImportItemPage(Page<ImportItemDto> importItemDtoPage, ImportItemDto importItemDto);
+
+    List<ImportItem> getName();
 }

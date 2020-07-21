@@ -24,4 +24,6 @@ public interface CountItemService extends IService<CountItem> {
     IPage<CountItem> selectPage(Page<CountItem> countItemPage);
 
     IPage<CountItemDto> selectCountItemPage(Page<ImportItemDto> importItemDtoPage, CountItemDto countItemDto);
+
+    List<CountItem> getName();
 }

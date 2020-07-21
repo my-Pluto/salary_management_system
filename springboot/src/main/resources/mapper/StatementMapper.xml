@@ -2,4 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.himoyi.salary_management_system.mapper.StatementMapper">
 
+    <select id="getEmployee_id" parameterType="com.himoyi.salary_management_system.common.dto.StatementDto"
+            resultType="java.lang.Long">
+        SELECT employee_id FROM statement
+        <where>
+            <if test="statementDto != null">
+                <if test="statementDto.id != null">
+                    AND statement.`id` = #{statementDto.id}
+                </if>
+                <if test="statementDto.name != null and statementDto.name != ''">
+                    AND statement.name = #{statementDto.name}
+                </if>
+                <if test="statementDto.employeeId != null and statementDto.employeeId != ''">
+                    AND statement.employee_id = #{statementDto.employeeId}
+                </if>
+                <if test="statementDto.employeeName != null and statementDto.employeeName != ''">
+                    AND statement.employee_name = #{statementDto.employeeName}
+                </if>
+                <if test="statementDto.departmentName != null and statementDto.departmentName != ''">
+                    AND statement.department_name = #{statementDto.departmentName}
+                </if>
+                <if test="statementDto.month != null and statementDto.month != ''">
+                    AND statement.month = #{statementDto.month}
+                </if>
+                <if test="statementDto.month != null ">
+                    AND statement.month = #{statementDto.month}
+                </if>
+            </if>
+        </where>
+        GROUP BY employee_id
+    </select>
 </mapper>

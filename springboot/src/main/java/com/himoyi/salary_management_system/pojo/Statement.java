@@ -45,12 +45,16 @@ public class Statement implements Serializable {
     /**
      * 员工工号
      */
-    private Long employee;
+    private Long employeeId;
+
+    private String employeeName;
 
     /**
      * 员工所在部门
      */
-    private String department;
+    private String departmentName;
+
+    private Long departmentId;
 
     /**
      * 增减项

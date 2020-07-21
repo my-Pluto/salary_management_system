@@ -23,7 +23,7 @@
                     AND import_item_data.employee_name = #{importItemDataDto.employeeName}
                 </if>
                 <if test="importItemDataDto.data != null and importItemDataDto.data != ''">
-                    AND import_item_data.data = #{importItemDataDto.lowSalary}
+                    AND import_item_data.data = #{importItemDataDto.data}
                 </if>
                 <if test="importItemDataDto.month != null ">
                     AND import_item_data.month = #{importItemDataDto.month}

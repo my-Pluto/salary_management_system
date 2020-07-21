@@ -10,6 +10,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -31,5 +34,12 @@ public class FixedItemServiceImpl extends ServiceImpl<FixedItemMapper, FixedItem
     @Override
     public IPage<FixedItemDto> selectFixedItemPage(Page<FixedItemDto> fixedItemDtoPage, FixedItemDto fixedItemDto) {
         return fixedItemMapper.selectFixedItemPage(fixedItemDtoPage, fixedItemDto);
+    }
+
+    @Override
+    public List<FixedItem> getName() {
+        List<FixedItem> fixedItems = fixedItemMapper.selectList(null);
+        fixedItems.sort(Comparator.comparing(FixedItem::getNumber));
+        return fixedItems;
     }
 }
