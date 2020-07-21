@@ -13,4 +13,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface StatementService extends IService<Statement> {
 
+    void countSalary(String department);
+
 }

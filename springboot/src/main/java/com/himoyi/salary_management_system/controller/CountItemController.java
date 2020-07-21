@@ -71,7 +71,7 @@ public class CountItemController {
                 countItemService.getOne(new QueryWrapper<CountItem>().eq("number", countItem.getNumber())) != null) {
             return Result.success("更新项目失败！工资条显示位置冲突！", null);
         }
-        
+
         countItemService.save(countItem);
         return Result.success("添加成功！", null);
     }

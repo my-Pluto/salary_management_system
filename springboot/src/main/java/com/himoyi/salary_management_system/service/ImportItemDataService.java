@@ -1,7 +1,12 @@
 package com.himoyi.salary_management_system.service;
 
+import com.himoyi.salary_management_system.common.dto.ImportItemDataDto;
+import com.himoyi.salary_management_system.common.dto.ImportItemDto;
 import com.himoyi.salary_management_system.pojo.ImportItemData;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +18,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ImportItemDataService extends IService<ImportItemData> {
 
+    List<Object> getData(Integer page, Integer size, ImportItemDataDto importItemDataDto);
+
+    void updateByEmployeeId(Object object, Long id, String name, String month);
+
+    String getLastMonth();
 }

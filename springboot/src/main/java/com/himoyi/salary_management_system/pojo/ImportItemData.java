@@ -9,8 +9,11 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * <p>
@@ -70,7 +73,7 @@ public class ImportItemData implements Serializable {
     /**
      * 年月
      */
-    private Date month;
+    private String month;
 
     /**
      * 版本信息

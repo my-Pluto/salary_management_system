@@ -2,4 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.himoyi.salary_management_system.mapper.ImportItemDataMapper">
 
+    <select id="getEmployee_id" parameterType="com.himoyi.salary_management_system.common.dto.ImportItemDataDto"
+            resultType="java.lang.Long">
+        SELECT employee_id FROM import_item_data
+        <where>
+            <if test="importItemDataDto != null">
+                <if test="importItemDataDto.id != null">
+                    AND import_item_data.`id` = #{importItemDataDto.id}
+                </if>
+                <if test="importItemDataDto.itemName != null and importItemDataDto.itemName != ''">
+                    AND import_item_data.item_name = #{importItemDataDto.itemName}
+                </if>
+                <if test="importItemDataDto.deptName != null and importItemDataDto.deptName != ''">
+                    AND import_item_data.dept_name = #{importItemDataDto.deptName}
+                </if>
+                <if test="importItemDataDto.employeeId != null and importItemDataDto.employeeId != ''">
+                    AND import_item_data.employee_id = #{importItemDataDto.employeeId}
+                </if>
+                <if test="importItemDataDto.employeeName != null and importItemDataDto.employeeName != ''">
+                    AND import_item_data.employee_name = #{importItemDataDto.employeeName}
+                </if>
+                <if test="importItemDataDto.data != null and importItemDataDto.data != ''">
+                    AND import_item_data.data = #{importItemDataDto.lowSalary}
+                </if>
+                <if test="importItemDataDto.month != null ">
+                    AND import_item_data.month = #{importItemDataDto.month}
+                </if>
+            </if>
+        </where>
+        GROUP BY employee_id
+    </select>
 </mapper>

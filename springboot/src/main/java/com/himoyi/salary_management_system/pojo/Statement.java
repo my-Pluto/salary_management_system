@@ -70,7 +70,7 @@ public class Statement implements Serializable {
     /**
      * 年月信息
      */
-    private Date month;
+    private String month;
 
     /**
      * 是否在工资条中显示

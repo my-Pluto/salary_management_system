@@ -2,8 +2,9 @@ package com.himoyi.salary_management_system.service.impl;
 
 import com.himoyi.salary_management_system.pojo.Statement;
 import com.himoyi.salary_management_system.mapper.StatementMapper;
-import com.himoyi.salary_management_system.service.StatementService;
+import com.himoyi.salary_management_system.service.*;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,4 +18,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class StatementServiceImpl extends ServiceImpl<StatementMapper, Statement> implements StatementService {
 
+    @Autowired
+    FixedItemService fixedItemService;
+    @Autowired
+    FixedItemDataService fixedItemDataService;
+    @Autowired
+    ImportItemService importItemService;
+    @Autowired
+    ImportItemDataService importItemDataService;
+    @Autowired
+    CountItemService countItemService;
+
+    @Override
+    public void countSalary(String department) {
+        
+    }
 }
