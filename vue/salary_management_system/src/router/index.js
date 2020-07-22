@@ -23,6 +23,10 @@ import NewImportItem from '../views/Salary/ImportItem/NewImportItem.vue'
 import DeptImportItem from '../views/Salary/ImportItem/DeptImportItem.vue'
 import AllImportItemData from '../views/Salary/ImportItem/AllImportItemData.vue'
 import EmployeeImportItem from '../views/Salary/ImportItem/EmployeeImportItem.vue'
+import Statement from '../views/Salary/Statement/Statement.vue'
+import Salary from '../views/Salary/Statement/Salary.vue'
+import StatementData from '../views/Salary/Statement/StatementData.vue'
+import CountStatement from '../views/Salary/Statement/CountStatement.vue'
 
 Vue.use(Router)
 
@@ -207,6 +211,38 @@ const routes = [{
 				}
 			}
 		]
+	},
+	{
+		path: '/statement',
+		name:'statement',
+		component: Statement,
+		meta: {
+			requireAuth: true
+		},
+		children: [{
+			path: 'countstatement',
+			name: 'countstatement',
+			component: CountStatement,
+			meta: {
+				requireAuth: true
+			}
+		},
+		{
+			path: 'statementdata',
+			name:'statementdata',
+			component: StatementData,
+			meta: {
+				requireAuth: true
+			}
+		},
+		{
+			path: 'salary',
+			name:'salary',
+			component: Salary,
+			meta: {
+				requireAuth: true
+			}
+		}]
 	},
 
 ]

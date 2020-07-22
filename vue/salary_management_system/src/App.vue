@@ -14,9 +14,9 @@
 				<el-menu-item index="/fixeditem">固定项目管理</el-menu-item>
 				<el-menu-item index="/countitem">计算项目管理</el-menu-item>
 				<el-menu-item index="/importitem">导入项目管理</el-menu-item>
-				<el-menu-item index="/salary">结算管理</el-menu-item>
+				<el-menu-item index="/statement">结算管理</el-menu-item>
 			</el-submenu>
-			<el-menu-item index="/statement">报表管理</el-menu-item>
+			<!-- <el-menu-item index="/statement">报表管理</el-menu-item> -->
 			<el-menu-item index="/users" v-if="userManagement">用户管理</el-menu-item>
 
 			<el-submenu index="user" style="float:right;">
