@@ -14,6 +14,9 @@ import FixedItemData from '../views/Salary/FixedItem/FixedItemData.vue'
 import NewFixedItem from '../views/Salary/FixedItem/NewFixedItem.vue'
 import AllFixedItemData from '../views/Salary/FixedItem/AllFixedItemData.vue'
 import DeptFixedItemData from '../views/Salary/FixedItem/DeptFixedItemData.vue'
+import CountItem from '../views/Salary/CountItem/CountItem.vue'
+import CountItemData from '../views/Salary/CountItem/CountItemData.vue'
+import NewCountItem from '../views/Salary/CountItem/NewCountItem.vue'
 
 Vue.use(Router)
 
@@ -124,7 +127,31 @@ const routes = [{
 				}
 			}
 		]
-	}
+	},
+	{
+		path: '/countitem',
+		name:'countitem',
+		component: CountItem,
+		meta: {
+			requireAuth: true
+		},
+		children: [{
+			path: 'countitemdata',
+			name: 'countitemdata',
+			component: CountItemData,
+			meta: {
+				requireAuth: true
+			}
+		},
+		{
+			path: 'newcountitem',
+			name:'newcountitem',
+			component: NewCountItem,
+			meta: {
+				requireAuth: true
+			}
+		}]
+	},
 ]
 
 const router = new Router({
