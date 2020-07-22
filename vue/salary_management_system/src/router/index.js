@@ -9,6 +9,11 @@ import NewUser from '../views/User/NewUser.vue'
 import Department from '../views/Department/Department.vue'
 import DepartmentData from '../views/Department/DepartmentData.vue'
 import NewDepartment from '../views/Department/NewDepartment.vue'
+import FixedItem from '../views/Salary/FixedItem/FixedItem.vue'
+import FixedItemData from '../views/Salary/FixedItem/FixedItemData.vue'
+import NewFixedItem from '../views/Salary/FixedItem/NewFixedItem.vue'
+import AllFixedItemData from '../views/Salary/FixedItem/AllFixedItemData.vue'
+import DeptFixedItemData from '../views/Salary/FixedItem/DeptFixedItemData.vue'
 
 Vue.use(Router)
 
@@ -77,6 +82,48 @@ const routes = [{
 				requireAuth: true
 			}
 		}]
+	},
+	{
+		path: '/fixeditem',
+		name: 'fixeditem',
+		component: FixedItem,
+		meta: {
+			requireAuth: true
+		},
+		children: [
+			{
+				path: 'fixeditemdata',
+				name: 'fixeditemdata',
+				component: FixedItemData,
+				meta: {
+					requireAuth: true
+				}
+			},
+			{
+				path: 'allfixeditemdata',
+				name: 'allfixeditemdata',
+				component: AllFixedItemData,
+				meta: {
+					requireAuth: true
+				}
+			},
+			{
+				path: 'newfixeditem',
+				name: 'newfixeditem',
+				component: NewFixedItem,
+				meta: {
+					requireAuth: true
+				}
+			},
+			{
+				path:'deptfixeditemdata',
+				name: 'deptfixeditemdata',
+				component: DeptFixedItemData,
+				meta: {
+					requireAuth: true
+				}
+			}
+		]
 	}
 ]
 
