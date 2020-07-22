@@ -17,6 +17,12 @@ import DeptFixedItemData from '../views/Salary/FixedItem/DeptFixedItemData.vue'
 import CountItem from '../views/Salary/CountItem/CountItem.vue'
 import CountItemData from '../views/Salary/CountItem/CountItemData.vue'
 import NewCountItem from '../views/Salary/CountItem/NewCountItem.vue'
+import ImportItem from '../views/Salary/ImportItem/ImportItem.vue'
+import ImportItemData from '../views/Salary/ImportItem/ImportItemData.vue'
+import NewImportItem from '../views/Salary/ImportItem/NewImportItem.vue'
+import DeptImportItem from '../views/Salary/ImportItem/DeptImportItem.vue'
+import AllImportItemData from '../views/Salary/ImportItem/AllImportItemData.vue'
+import EmployeeImportItem from '../views/Salary/ImportItem/EmployeeImportItem.vue'
 
 Vue.use(Router)
 
@@ -152,6 +158,57 @@ const routes = [{
 			}
 		}]
 	},
+	{
+		path: '/importitem',
+		name: 'importitem',
+		component: ImportItem,
+		meta: {
+			requireAuth: true
+		},
+		children: [
+			{
+				path: 'importitemdata',
+				name: 'importitemdata',
+				component: ImportItemData,
+				meta: {
+					requireAuth: true
+				}
+			},
+			{
+				path: 'allimportitemdata',
+				name: 'allimportitemdata',
+				component: AllImportItemData,
+				meta: {
+					requireAuth: true
+				}
+			},
+			{
+				path: 'newimportitem',
+				name: 'newimportitem',
+				component: NewImportItem,
+				meta: {
+					requireAuth: true
+				}
+			},
+			{
+				path:'deptimportitem',
+				name: 'deptimportitem',
+				component: DeptImportItem,
+				meta: {
+					requireAuth: true
+				}
+			},
+			{
+				path:'employeeimportitem',
+				name: 'employeeimportitem',
+				component: EmployeeImportItem,
+				meta: {
+					requireAuth: true
+				}
+			}
+		]
+	},
+
 ]
 
 const router = new Router({
