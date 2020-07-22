@@ -49,6 +49,10 @@ public class ImportItemDataDto {
      * 年月
      */
     private String month;
+    
+    private String lowMonth;
+
+    private String highMonth;
 
 
 }

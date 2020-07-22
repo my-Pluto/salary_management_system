@@ -63,13 +63,13 @@ public class CountItemController {
     @PostMapping
     @RequiresAuthentication
     public Result addCountItem(@RequestBody CountItem countItem) {
-        if (countItemService.getOne(new QueryWrapper<CountItem>().eq("name", countItem.getName())) == null) {
+        if (countItemService.getOne(new QueryWrapper<CountItem>().eq("name", countItem.getName())) != null) {
             return Result.fail("添加失败，该项目已存在！", null);
         }
 
         if (countItem.getIsDisplay() != 0 &&
                 countItemService.getOne(new QueryWrapper<CountItem>().eq("number", countItem.getNumber())) != null) {
-            return Result.success("更新项目失败！工资条显示位置冲突！", null);
+            return Result.fail("添加项目失败！工资条显示位置冲突！", null);
         }
 
         countItemService.save(countItem);
@@ -82,8 +82,8 @@ public class CountItemController {
             return Result.fail("更新失败！该项目不存在！", null);
         }
         if (countItem.getIsDisplay() != 0 &&
-                countItemService.getOne(new QueryWrapper<CountItem>().eq("number", countItem.getNumber())) != null) {
-            return Result.success("更新项目失败！工资条显示位置冲突！", null);
+                countItemService.getOne(new QueryWrapper<CountItem>().eq("number", countItem.getNumber()).ne("id", countItem.getId())) != null) {
+            return Result.fail("更新项目失败！工资条显示位置冲突！", null);
         }
         countItemService.updateById(countItem);
         return Result.success("更新成功！", null);

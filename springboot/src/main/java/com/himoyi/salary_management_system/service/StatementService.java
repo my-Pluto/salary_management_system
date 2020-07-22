@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -24,5 +25,5 @@ public interface StatementService extends IService<Statement> {
 
     void updateByEmployeeId(BigDecimal valueOf, Long employee_id, String month, String name);
 
-    List<Object> getData(Integer page, Integer size, StatementDto statementDto);
+    Map<String, Object> getData(Integer page, Integer size, StatementDto statementDto);
 }

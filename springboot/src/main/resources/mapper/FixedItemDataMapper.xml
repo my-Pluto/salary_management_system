@@ -51,6 +51,19 @@
                 </if>
             </if>
         </where>
-        GROUP BY employee_id
+         GROUP BY employee_id
+    </select>
+
+    <select id="getName" parameterType="com.himoyi.salary_management_system.common.dto.FixedItemDataDto"
+            resultType="java.lang.String">
+        SELECT name FROM fixed_item_data
+        <where>
+            <if test="fixedItemDataDto != null">
+                <if test="fixedItemDataDto.name != null and fixedItemDataDto.name != ''">
+                    AND fixed_item_data.name = #{fixedItemDataDto.name}
+                </if>
+            </if>
+        </where>
+        GROUP BY name
     </select>
 </mapper>

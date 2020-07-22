@@ -25,7 +25,7 @@ import java.util.List;
 public interface FixedItemDataMapper extends BaseMapper<FixedItemData> {
 
     @Select("SELECT NAME FROM fixed_item_data GROUP BY NAME")
-    List<String> getName();
+    List<String> getName(@Param("fixedItemDataDto") FixedItemDataDto fixedItemDataDto);
 
     List<Long> getEmployee_id(@Param("fixedItemDataDto") FixedItemDataDto fixedItemDataDto);
 

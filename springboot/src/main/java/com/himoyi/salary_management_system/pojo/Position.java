@@ -60,12 +60,6 @@ public class Position implements Serializable {
     private Date gmtModified;
 
     /**
-     * 逻辑删除
-     */
-    @TableLogic
-    private Integer isDeleted;
-
-    /**
      * 部门id
      */
     private Long departmentId;

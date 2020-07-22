@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -51,7 +52,7 @@ public class ImportItemDataController {
     @GetMapping("/importitemdata/{page}/{size}")
     @RequiresAuthentication
     public Result getimportItemData(@PathVariable(name = "page") Integer page, @PathVariable(name = "size") Integer size){
-        List<Object> list = importItemDataService.getData(page, size, null);
+        Map<String, Object> list = importItemDataService.getData(page, size, null);
         return Result.success("查询成功！", list);
     }
 
@@ -60,7 +61,7 @@ public class ImportItemDataController {
     public Result getimportItemDataByData(@RequestBody ImportItemDataDto importItemDataDto,
                                          @PathVariable(name = "page") Integer page, @PathVariable(name = "size") Integer size) {
         System.out.println(importItemDataDto);
-        List<Object> list = importItemDataService.getData(page, size, importItemDataDto);
+        Map<String, Object> list = importItemDataService.getData(page, size, importItemDataDto);
 
         return Result.success("查询成功！", list);
     }

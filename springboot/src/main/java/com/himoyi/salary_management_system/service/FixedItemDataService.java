@@ -7,6 +7,7 @@ import com.himoyi.salary_management_system.pojo.FixedItemData;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -22,7 +23,7 @@ public interface FixedItemDataService extends IService<FixedItemData> {
 
     IPage<FixedItemData> selectFixedItemPage(Page<FixedItemDataDto> fixedItemDataPage, FixedItemDataDto fixedItemDataDto);
 
-    List<Object> getData(Integer page, Integer size, FixedItemDataDto fixedItemDataDto);
+    Map<String, Object> getData(Integer page, Integer size, FixedItemDataDto fixedItemDataDto);
 
     void updateByEmployeeId(Object object, Long id, String name);
 }

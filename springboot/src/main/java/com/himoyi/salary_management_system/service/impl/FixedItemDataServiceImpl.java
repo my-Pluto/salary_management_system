@@ -42,14 +42,14 @@ public class FixedItemDataServiceImpl extends ServiceImpl<FixedItemDataMapper, F
     }
 
     @Override
-    public List<Object> getData(Integer page, Integer size, FixedItemDataDto fixedItemDataDto) {
+    public Map<String, Object> getData(Integer page, Integer size, FixedItemDataDto fixedItemDataDto) {
         List<Long> ids = fixedItemDataMapper.getEmployee_id(fixedItemDataDto);
 
-        List<String> names = fixedItemDataMapper.getName();
+        List<String> names = fixedItemDataMapper.getName(fixedItemDataDto);
 
-        Integer total = ids.size() / size + 1;
+        Integer allPageNumber = ids.size() / size + 1;
         Integer first = (size * page) - size;
-        int allPageNumber = ids.size();
+        int total = ids.size();
 
         Map<String, Object> all = MapUtil.newHashMap();
         all.put("total", total);
@@ -72,10 +72,9 @@ public class FixedItemDataServiceImpl extends ServiceImpl<FixedItemDataMapper, F
             }
             data.add(map);
         }
-        List<Object> list = new ArrayList<Object>();
-        list.add(all);
-        list.add(data);
-        return list;
+
+        all.put("data", data);
+        return all;
     }
 
     @Override

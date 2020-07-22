@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -100,7 +101,7 @@ public class StatementController {
     public Result getData(@RequestBody StatementDto statementDto,
                           @PathVariable(name = "page") Integer page,
                           @PathVariable(name = "size") Integer size) {
-        List<Object> list = statementService.getData(page, size, statementDto);
+        Map<String, Object> list = statementService.getData(page, size, statementDto);
         return Result.success("查询成功！", list);
     }
 }

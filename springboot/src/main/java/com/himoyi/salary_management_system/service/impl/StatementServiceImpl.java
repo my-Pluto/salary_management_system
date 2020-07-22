@@ -178,12 +178,12 @@ public class StatementServiceImpl extends ServiceImpl<StatementMapper, Statement
     }
 
     @Override
-    public List<Object> getData(Integer page, Integer size, StatementDto statementDto) {
+    public Map<String, Object> getData(Integer page, Integer size, StatementDto statementDto) {
         List<Long> ids = statementMapper.getEmployee_id(statementDto);
 
-        Integer total = ids.size() / size + 1;
+        Integer allPageNumber = ids.size() / size + 1;
         Integer first = (size * page) - size;
-        int allPageNumber = ids.size();
+        int total = ids.size();
 
         List<FixedItem> fixedItems = fixedItemService.getName();
         List<CountItem> countItems = countItemService.getName();
@@ -223,10 +223,8 @@ public class StatementServiceImpl extends ServiceImpl<StatementMapper, Statement
             data.add(map);
         }
 
-        List<Object> list = new ArrayList<Object>();
-        list.add(all);
-        list.add(data);
-        return list;
+        all.put("data", data);
+        return all;
     }
 
 }

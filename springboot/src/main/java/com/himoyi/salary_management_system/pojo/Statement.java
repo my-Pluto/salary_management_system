@@ -99,11 +99,6 @@ public class Statement implements Serializable {
       @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
 
-    /**
-     * 逻辑删除
-     */
-    @TableLogic
-    private Integer isDeleted;
 
 
 }

@@ -41,7 +41,7 @@ public class FixedItemController {
     @RequiresAuthentication
     public Result getFixiedItem() {
         List<FixedItem> fixedItems = fixedItemService.list();
-        return Result.success("查询成功！", null);
+        return Result.success("查询成功！", fixedItems);
     }
 
     @GetMapping("/fixeditem/{page}/{size}")
@@ -62,12 +62,12 @@ public class FixedItemController {
     @PostMapping
     @RequiresAuthentication
     public Result addFixedItem(@RequestBody FixedItem fixedItem) {
-        if (fixedItemService.getOne(new QueryWrapper<FixedItem>().eq("name", fixedItem.getName())) == null) {
+        if (fixedItemService.getOne(new QueryWrapper<FixedItem>().eq("name", fixedItem.getName())) != null) {
             return Result.fail("添加失败！该项目已存在！", null);
         }
         if (fixedItem.getIsDisplay() != 0 &&
                 fixedItemService.getOne(new QueryWrapper<FixedItem>().eq("number", fixedItem.getNumber())) != null) {
-            return Result.success("添加项目失败！工资条显示位置冲突！", null);
+            return Result.fail("添加项目失败！工资条显示位置冲突！", null);
         }
         if (fixedItem.getIsDisplay() == 0)
             fixedItem.setNumber(0);
@@ -84,8 +84,8 @@ public class FixedItemController {
         }
 
         if (fixedItem.getIsDisplay() != 0 &&
-                fixedItemService.getOne(new QueryWrapper<FixedItem>().eq("number", fixedItem.getNumber())) != null) {
-            return Result.success("更新项目失败！工资条显示位置冲突！", null);
+                fixedItemService.getOne(new QueryWrapper<FixedItem>().eq("number", fixedItem.getNumber()).ne("id", fixedItem.getId())) != null) {
+            return Result.fail("更新项目失败！工资条显示位置冲突！", null);
         }
         if (fixedItem.getIsDisplay() == 0)
             fixedItem.setNumber(0);

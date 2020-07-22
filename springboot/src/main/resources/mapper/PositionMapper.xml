@@ -16,6 +16,9 @@
                 <if test="positionDto.department != null and positionDto.department != ''">
                     AND position.department = #{positionDto.department}
                 </if>
+                <if test="positionDto.departmentId != null and positionDto.departmentId != ''">
+                    AND position.department_id = #{positionDto.departmentId}
+                </if>
             </if>
         </where>
     </select>

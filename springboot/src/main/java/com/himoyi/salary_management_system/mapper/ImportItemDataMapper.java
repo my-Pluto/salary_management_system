@@ -23,12 +23,11 @@ import java.util.List;
 @Mapper
 public interface ImportItemDataMapper extends BaseMapper<ImportItemData> {
 
-    @Select("SELECT item_name FROM import_item_data WHERE month = #{importItemDataDto.month} GROUP BY item_name")
     List<String> getName(@Param("importItemDataDto") ImportItemDataDto importItemDataDto);
 
     List<Long> getEmployee_id(@Param("importItemDataDto") ImportItemDataDto importItemDataDto);
 
-    @Select("SELECT data FROM import_item_data WHERE employee_id = #{id} AND item_name = #{name} AND month = #{importItemDataDto.month}")
+    @Select("SELECT data FROM import_item_data WHERE employee_id = #{id} AND item_name = #{name} AND month >= #{importItemDataDto.lowMonth} AND month <= #{importItemDataDto.highMonth}")
     BigDecimal getSalary(@Param("id") Long id, @Param("name") String name,
                          @Param("importItemDataDto") ImportItemDataDto importItemDataDto);
 

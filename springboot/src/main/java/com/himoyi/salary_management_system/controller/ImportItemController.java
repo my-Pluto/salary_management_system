@@ -39,7 +39,7 @@ public class ImportItemController {
     @RequiresAuthentication
     public Result getImportItems() {
         List<ImportItem> importItems = importItemService.list();
-        return Result.success("查询成功！", null);
+        return Result.success("查询成功！", importItems);
     }
 
     @GetMapping("/importitem/{page}/{size}")
@@ -61,13 +61,13 @@ public class ImportItemController {
     @PostMapping
     @RequiresAuthentication
     public Result addImportItem(@RequestBody ImportItem importItem) {
-        if (importItemService.getOne(new QueryWrapper<ImportItem>().eq("name", importItem.getName())) == null) {
+        if (importItemService.getOne(new QueryWrapper<ImportItem>().eq("name", importItem.getName())) != null) {
             return Result.fail("添加失败，该项目已存在！", null);
         }
 
         if (importItem.getIsDisplay() != 0 &&
-                importItemService.getOne(new QueryWrapper<ImportItem>().eq("number", importItem.getNumber())) != null) {
-            return Result.success("更新项目失败！工资条显示位置冲突！", null);
+                importItemService.getOne(new QueryWrapper<ImportItem>().eq("number", importItem.getNumber()).ne("id", importItem.getId())) != null) {
+            return Result.fail("添加项目失败！工资条显示位置冲突！", null);
         }
 
         importItemService.save(importItem);
@@ -80,7 +80,7 @@ public class ImportItemController {
             return Result.fail("更新失败！该项目不存在！", null);
         }
         if (importItem.getIsDisplay() != 0 &&
-                importItemService.getOne(new QueryWrapper<ImportItem>().eq("number", importItem.getNumber())) != null) {
+                importItemService.getOne(new QueryWrapper<ImportItem>().eq("number", importItem.getNumber()).ne("id", importItem.getId())) != null) {
             return Result.success("更新项目失败！工资条显示位置冲突！", null);
         }
         importItemService.updateById(importItem);

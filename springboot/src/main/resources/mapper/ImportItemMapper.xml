@@ -10,7 +10,7 @@
                 <if test="importItemDto.id != null">
                     AND import_item.`id` = #{importItemDto.id}
                 </if>
-                <if test="fimportItemDto.name != null and importItemDto.name != ''">
+                <if test="importItemDto.name != null and importItemDto.name != ''">
                     AND import_item.name = #{importItemDto.name}
                 </if>
                 <if test="importItemDto.effect != null and importItemDto.effect != ''">

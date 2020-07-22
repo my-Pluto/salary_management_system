@@ -32,14 +32,14 @@ public class ImportItemDataServiceImpl extends ServiceImpl<ImportItemDataMapper,
     ImportItemDataMapper importItemDataMapper;
 
     @Override
-    public List<Object> getData(Integer page, Integer size, ImportItemDataDto importItemDataDto) {
+    public Map<String, Object> getData(Integer page, Integer size, ImportItemDataDto importItemDataDto) {
         List<Long> ids = importItemDataMapper.getEmployee_id(importItemDataDto);
 
         List<String> names = importItemDataMapper.getName(importItemDataDto);
 
-        Integer total = ids.size() / size + 1;
+        Integer allPageNumber = ids.size() / size + 1;
         Integer first = (size * page) - size;
-        int allPageNumber = ids.size();
+        int total = ids.size();
 
         Map<String, Object> all = MapUtil.newHashMap();
         all.put("total", total);
@@ -62,10 +62,8 @@ public class ImportItemDataServiceImpl extends ServiceImpl<ImportItemDataMapper,
             }
             data.add(map);
         }
-        List<Object> list = new ArrayList<Object>();
-        list.add(all);
-        list.add(data);
-        return list;
+        all.put("data", data);
+        return all;
     }
 
     @Override

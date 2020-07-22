@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -18,7 +19,7 @@ import java.util.List;
  */
 public interface ImportItemDataService extends IService<ImportItemData> {
 
-    List<Object> getData(Integer page, Integer size, ImportItemDataDto importItemDataDto);
+    Map<String, Object> getData(Integer page, Integer size, ImportItemDataDto importItemDataDto);
 
     void updateByEmployeeId(Object object, Long id, String name, String month);
 

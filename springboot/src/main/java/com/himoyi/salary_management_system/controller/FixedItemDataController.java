@@ -23,11 +23,12 @@ import javax.xml.ws.soap.Addressing;
 import java.awt.geom.RectangularShape;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author 张玉飞 陈辰 刘月锟 宫雅琦 邵景宇
@@ -54,8 +55,8 @@ public class FixedItemDataController {
 
     @GetMapping("/fixeditemdata/{page}/{size}")
     @RequiresAuthentication
-    public Result getFixedItemData(@PathVariable(name = "page") Integer page, @PathVariable(name = "size") Integer size){
-        List<Object> list = fixedItemDataService.getData(page, size, null);
+    public Result getFixedItemData(@PathVariable(name = "page") Integer page, @PathVariable(name = "size") Integer size) {
+        Map<String, Object> list = fixedItemDataService.getData(page, size, null);
         return Result.success("查询成功！", list);
     }
 
@@ -63,7 +64,8 @@ public class FixedItemDataController {
     @RequiresAuthentication
     public Result getFixedItemDataByData(@RequestBody FixedItemDataDto fixedItemDataDto,
                                          @PathVariable(name = "page") Integer page, @PathVariable(name = "size") Integer size) {
-        List<Object> list = fixedItemDataService.getData(page, size, fixedItemDataDto);
+        Map<String, Object> list = fixedItemDataService.getData(page, size, fixedItemDataDto);
+        System.out.println(fixedItemDataDto);
 
         return Result.success("查询成功！", list);
     }
@@ -79,10 +81,14 @@ public class FixedItemDataController {
                 BeanUtil.copyProperties(fixedItemData, fixedItemData1);
                 fixedItemData1.setEmployeeId(employee.getId());
                 fixedItemData1.setEmployeeName(employee.getName());
-                fixedItemDataService.saveOrUpdate(fixedItemData1);
+
+                fixedItemDataService.saveOrUpdate(fixedItemData1, new QueryWrapper<FixedItemData>()
+                        .eq("dept_id", fixedItemData1.getDeptId())
+                        .eq("employee_id", fixedItemData1.getEmployeeId())
+                        .eq("item_id", fixedItemData1.getItemId()));
             }
         }
-        return Result.success("批量修改成功！",null);
+        return Result.success("批量修改成功！", null);
     }
 
     @PostMapping("/fixeditemdata/{employeeid}")
@@ -95,7 +101,7 @@ public class FixedItemDataController {
         for (String string : strings) {
             Object o = jsonObject.get(string);
             System.out.println(o.toString());
-           fixedItemDataService.updateByEmployeeId(BigDecimal.valueOf(Double.parseDouble(o.toString())), id, string);
+            fixedItemDataService.updateByEmployeeId(BigDecimal.valueOf(Double.parseDouble(o.toString())), id, string);
         }
         return Result.success("更新成功！", null);
     }
