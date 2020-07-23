@@ -1,32 +1,21 @@
-<template >
-	<div class="note">
-		<el-carousel :interval="4000" type="card" height="1050px">
-			<el-carousel-item v-for="item in imags" :key="item">
-				<el-image style="height: 350px;" :src="item" fit="fill">
-				</el-image>
-			</el-carousel-item>
-		</el-carousel>
+<template>
+	<div class="demo-image">
+			<el-image style="width: 500px; height: 500px; margin-left: 450px; margin-top: 50px;" :src="url" :fit="fit"></el-image>
 	</div>
 </template>
 
 <script>
-	import Image1 from '../assets/indexImages/1.jpg'
-	import Image2 from '../assets/indexImages/2.jpg'
-	import Image3 from '../assets/indexImages/3.jpg'
+	import logo from '../assets/4.jpg'
 	export default {
 		name: 'Index',
-		data(){
-			return{
-				imags:[Image1,Image2,Image3]
+		data() {
+			return {
+				fits: 'fill',
+				url: logo
 			}
 		}
 	}
 </script>
 
 <style>
-	.note{
-		background-image: url("../assets/0.jpg");
-		background-repeat: no-repeat;
-		background-size: cover;
-	}
 </style>
