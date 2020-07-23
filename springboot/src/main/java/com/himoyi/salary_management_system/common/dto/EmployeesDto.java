@@ -4,6 +4,9 @@ import lombok.Data;
 
 import java.util.Date;
 
+/**
+ * 员工Dto
+ */
 @Data
 public class EmployeesDto {
 

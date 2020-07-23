@@ -26,16 +26,20 @@ public class FixedItemServiceImpl extends ServiceImpl<FixedItemMapper, FixedItem
 
     @Autowired
     FixedItemMapper fixedItemMapper;
+
+    // 分页
     @Override
     public IPage<FixedItem> selectPage(IPage<FixedItem> page) {
         return fixedItemMapper.selectPage(page, null);
     }
 
+    // 分页查询
     @Override
     public IPage<FixedItemDto> selectFixedItemPage(Page<FixedItemDto> fixedItemDtoPage, FixedItemDto fixedItemDto) {
         return fixedItemMapper.selectFixedItemPage(fixedItemDtoPage, fixedItemDto);
     }
 
+    // 获取名称
     @Override
     public List<FixedItem> getName() {
         List<FixedItem> fixedItems = fixedItemMapper.selectList(null);

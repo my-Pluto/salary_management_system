@@ -4,7 +4,10 @@ import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.Date;
+
+/**
+ * 固定项目数据Dto
+ */
 
 @Data
 public class FixedItemDataDto {

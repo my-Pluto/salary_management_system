@@ -2,6 +2,9 @@ package com.himoyi.salary_management_system.common.dto;
 
 import lombok.Data;
 
+/**
+ * 岗位Dto
+ */
 
 @Data
 public class PositionDto {

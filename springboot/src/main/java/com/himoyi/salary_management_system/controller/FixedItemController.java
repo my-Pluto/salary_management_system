@@ -5,8 +5,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.himoyi.salary_management_system.common.Result;
-import com.himoyi.salary_management_system.common.dto.EmployeeDto;
-import com.himoyi.salary_management_system.common.dto.EmployeesDto;
 import com.himoyi.salary_management_system.common.dto.FixedItemDto;
 import com.himoyi.salary_management_system.pojo.FixedItem;
 import com.himoyi.salary_management_system.pojo.FixedItemData;
@@ -16,13 +14,14 @@ import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.ResultSet;
 import java.util.List;
 
 /**
  * <p>
  * 前端控制器
  * </p>
+ *
+ * 固定项目控制器
  *
  * @author 张玉飞 陈辰 刘月锟 宫雅琦 邵景宇
  * @since 2020-07-17
@@ -37,6 +36,10 @@ public class FixedItemController {
     @Autowired
     FixedItemDataService fixedItemDataService;
 
+    /**
+     * 所有固定项目
+     * @return
+     */
     @GetMapping("/fixeditem")
     @RequiresAuthentication
     public Result getFixiedItem() {
@@ -44,6 +47,12 @@ public class FixedItemController {
         return Result.success("查询成功！", fixedItems);
     }
 
+    /**
+     * 所有固定项目，分页
+     * @param page
+     * @param size
+     * @return
+     */
     @GetMapping("/fixeditem/{page}/{size}")
     @RequiresAuthentication
     public Result getFixedItem(@PathVariable(name = "page") Integer page, @PathVariable(name = "size") Integer size) {
@@ -51,6 +60,13 @@ public class FixedItemController {
         return Result.success("查询成功！", fixedItemIPage);
     }
 
+    /**
+     * 根据参数查询，分页
+     * @param fixedItemDto
+     * @param page
+     * @param size
+     * @return
+     */
     @PostMapping("/fixeditem/{page}/{size}")
     @RequiresAuthentication
     public Result getFixedItem(@RequestBody FixedItemDto fixedItemDto,
@@ -59,6 +75,11 @@ public class FixedItemController {
         return Result.success("查询成功！", fixedItemIPage);
     }
 
+    /**
+     * 添加项目
+     * @param fixedItem
+     * @return
+     */
     @PostMapping
     @RequiresAuthentication
     public Result addFixedItem(@RequestBody FixedItem fixedItem) {
@@ -75,6 +96,11 @@ public class FixedItemController {
         return Result.success("添加成功!", null);
     }
 
+    /**
+     * 根据id更新项目
+     * @param fixedItem
+     * @return
+     */
     @PostMapping("{id}")
     @RequiresAuthentication
     public Result updateFixedItem(@RequestBody FixedItem fixedItem) {
@@ -94,6 +120,11 @@ public class FixedItemController {
         return Result.success("更新成功！", null);
     }
 
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
     @DeleteMapping("{id}")
     @RequiresAuthentication
     public Result deleteFixedItem(@PathVariable(name = "id") Long id) {

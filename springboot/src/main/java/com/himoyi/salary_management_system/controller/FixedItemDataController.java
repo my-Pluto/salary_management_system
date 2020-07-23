@@ -46,6 +46,10 @@ public class FixedItemDataController {
     @Autowired
     EmployeeService employeeService;
 
+    /**
+     * 所有数据
+     * @return
+     */
     @GetMapping
     @RequiresAuthentication
     public Result getFixedItemDatas() {
@@ -53,6 +57,12 @@ public class FixedItemDataController {
         return Result.success("查询成功！", fixedItemDatas);
     }
 
+    /**
+     * 分页获取数据
+     * @param page
+     * @param size
+     * @return
+     */
     @GetMapping("/fixeditemdata/{page}/{size}")
     @RequiresAuthentication
     public Result getFixedItemData(@PathVariable(name = "page") Integer page, @PathVariable(name = "size") Integer size) {
@@ -60,6 +70,13 @@ public class FixedItemDataController {
         return Result.success("查询成功！", list);
     }
 
+    /**
+     * 分页查询
+     * @param fixedItemDataDto
+     * @param page
+     * @param size
+     * @return
+     */
     @PostMapping("/fixeditemdata/{page}/{size}")
     @RequiresAuthentication
     public Result getFixedItemDataByData(@RequestBody FixedItemDataDto fixedItemDataDto,
@@ -70,12 +87,20 @@ public class FixedItemDataController {
         return Result.success("查询成功！", list);
     }
 
+    /**
+     * 修改数据
+     * @param fixedItemData
+     * @return
+     */
     @PostMapping("/fixeditemdata")
     @RequiresAuthentication
     public Result saveOrUpdateFixedItemData(@RequestBody FixedItemData fixedItemData) {
+        //批量修改
         if (fixedItemData.getEmployeeId() == null || fixedItemData.getEmployeeName() == null) {
+            // 获取员工信息
             List<Employee> employees = employeeService.list(
                     new QueryWrapper<Employee>().eq("department", fixedItemData.getDeptId()));
+            //循环修改
             for (Employee employee : employees) {
                 FixedItemData fixedItemData1 = new FixedItemData();
                 BeanUtil.copyProperties(fixedItemData, fixedItemData1);
@@ -91,21 +116,33 @@ public class FixedItemDataController {
         return Result.success("批量修改成功！", null);
     }
 
+    /**
+     * 根据id更新信息
+     * @param json
+     * @param id
+     * @return
+     */
     @PostMapping("/fixeditemdata/{employeeid}")
     @RequiresAuthentication
     public Result updateFixedItemDataByEmployeeId(@RequestBody String json, @PathVariable(name = "employeeid") Long id) {
-        System.out.println(json);
+
+        // 解析字符串
         JSONObject jsonObject = JSONUtil.parseObj(json);
-        System.out.println(jsonObject.keySet());
         Set<String> strings = jsonObject.keySet();
+
+        // 循环更新项目
         for (String string : strings) {
             Object o = jsonObject.get(string);
-            System.out.println(o.toString());
             fixedItemDataService.updateByEmployeeId(BigDecimal.valueOf(Double.parseDouble(o.toString())), id, string);
         }
         return Result.success("更新成功！", null);
     }
 
+    /**
+     * 根据id删除
+     * @param id
+     * @return
+     */
     @DeleteMapping("{id}")
     @RequiresAuthentication
     public Result deleteFixedItemData(@PathVariable(name = "id") Long id) {

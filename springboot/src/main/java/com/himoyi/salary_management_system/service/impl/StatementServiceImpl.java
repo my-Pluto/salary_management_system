@@ -25,6 +25,8 @@ import java.util.Map;
  * 服务实现类
  * </p>
  *
+ * 报表、工资发放服务
+ *
  * @author 张玉飞 陈辰 刘月锟 宫雅琦 邵景宇
  * @since 2020-07-17
  */
@@ -47,15 +49,24 @@ public class StatementServiceImpl extends ServiceImpl<StatementMapper, Statement
     @Autowired
     StatementMapper statementMapper;
 
+    /**
+     * 计算工资
+     * @param department
+     * @param month
+     */
     @Override
     public void countSalary(Long department, String month) {
 
+        //生成固定项目信息
         FixedItemDataDto fixedItemDataDto = new FixedItemDataDto();
         fixedItemDataDto.setDeptId(department);
+
+        // 获取所有员工id
         List<Long> ids = fixedItemDataMapper.getEmployee_id(fixedItemDataDto);
 
         BigDecimal salary = BigDecimal.valueOf(0);
 
+        // 循环获取固定信息并将信息填入工资表单中
         for (Long employee_id : ids) {
             List<FixedItemData> fixedItemDatas =
                     fixedItemDataService.list(new QueryWrapper<FixedItemData>().eq("employee_id", employee_id));
@@ -82,6 +93,7 @@ public class StatementServiceImpl extends ServiceImpl<StatementMapper, Statement
                 statementMapper.insert(statement);
             }
 
+            // 循环获取导入想项目信息并填入表单中
             List<ImportItemData> importItemDatas =
                     importItemDataService.list(new QueryWrapper<ImportItemData>().eq("employee_id", employee_id));
             for (ImportItemData importItemData : importItemDatas) {
@@ -107,6 +119,7 @@ public class StatementServiceImpl extends ServiceImpl<StatementMapper, Statement
                 statementMapper.insert(statement);
             }
 
+            // 循环获取计算项目信息并填入表单
             List<CountItem> countItems = countItemService.list();
             for (CountItem countItem : countItems) {
                 ImportItemData importItemData = importItemDataService.
@@ -151,6 +164,7 @@ public class StatementServiceImpl extends ServiceImpl<StatementMapper, Statement
                 statementMapper.insert(statement);
             }
 
+            // 生成实发工资信息
             FixedItemData fixedItemData = fixedItemDatas.get(0);
             Statement statement = new Statement();
             statement.setName("实发工资");
@@ -168,15 +182,34 @@ public class StatementServiceImpl extends ServiceImpl<StatementMapper, Statement
         }
     }
 
+    /**
+     * 工资发放
+     * @param department
+     * @param month
+     */
     public void salaryProvided(Long department, String month) {
         statementMapper.salaryProvided(department, month);
     }
 
+    /**
+     * 根据id更新信息
+     * @param valueOf
+     * @param employee_id
+     * @param month
+     * @param name
+     */
     @Override
     public void updateByEmployeeId(BigDecimal valueOf, Long employee_id, String month, String name) {
         statementMapper.updateByEmployeeId(valueOf, employee_id, month, name);
     }
 
+    /**
+     * 获取数据
+     * @param page
+     * @param size
+     * @param statementDto
+     * @return
+     */
     @Override
     public Map<String, Object> getData(Integer page, Integer size, StatementDto statementDto) {
         List<Long> ids = statementMapper.getEmployee_id(statementDto);

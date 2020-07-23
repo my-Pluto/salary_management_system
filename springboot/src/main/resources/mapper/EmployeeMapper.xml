@@ -13,10 +13,10 @@
                 <if test="employeeDto.id != null">
                     AND employee.`id` = #{employeeDto.id}
                 </if>
-                <if test="employeeDto.name != null and emplpyeeDto.name != ''">
+                <if test="employeeDto.name != null and employeeDto.name != ''">
                     AND employee.`name` = #{employeeDto.name}
                 </if>
-                <if test="employeeDto.sex != null and emplpyeeDto.sex != ''">
+                <if test="employeeDto.sex != null and employeeDto.sex != ''">
                     AND employee.`sex` = #{employeeDto.sex}
                 </if>
                 <if test="employeeDto.department != null">
@@ -25,7 +25,7 @@
                 <if test="employeeDto.position != null">
                     AND employee.`position` = #{employeeDto.position}
                 </if>
-                <if test="employeeDto.email != null and emplpyeeDto.email != ''">
+                <if test="employeeDto.email != null and employeeDto.email != ''">
                     AND employee.`email` = #{employeeDto.email}
                 </if>
                 <if test="employeeDto.entryTime != null">

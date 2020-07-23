@@ -31,12 +31,22 @@ public class ImportItemDataServiceImpl extends ServiceImpl<ImportItemDataMapper,
     @Autowired
     ImportItemDataMapper importItemDataMapper;
 
+    /**
+     * 获取数据
+     * @param page
+     * @param size
+     * @param importItemDataDto
+     * @return
+     */
     @Override
     public Map<String, Object> getData(Integer page, Integer size, ImportItemDataDto importItemDataDto) {
+        // 获取所有id
         List<Long> ids = importItemDataMapper.getEmployee_id(importItemDataDto);
 
+        // 获取所有项目名称
         List<String> names = importItemDataMapper.getName(importItemDataDto);
 
+        // 填入分页信息
         Integer allPageNumber = ids.size() / size + 1;
         Integer first = (size * page) - size;
         int total = ids.size();
@@ -48,6 +58,7 @@ public class ImportItemDataServiceImpl extends ServiceImpl<ImportItemDataMapper,
 
         List<Map<String, Object>> data = new ArrayList<>();
 
+        // 循环获取用户数据
         for (int i = first; i < (size > ids.size() ? ids.size() : size); i++) {
             Map<String, Object> map = MapUtil.newHashMap();
             Long id = ids.get(i);
@@ -66,6 +77,7 @@ public class ImportItemDataServiceImpl extends ServiceImpl<ImportItemDataMapper,
         return all;
     }
 
+    // 根据id更新数据
     @Override
     public void updateByEmployeeId(Object object, Long id, String name, String month) {
         importItemDataMapper.updateByEmployeeId(object, id, name, month);

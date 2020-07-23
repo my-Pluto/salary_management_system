@@ -3,7 +3,6 @@ package com.himoyi.salary_management_system.common.dto;
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
-import java.util.Date;
 
 @Data
 public class FixedItemDto {

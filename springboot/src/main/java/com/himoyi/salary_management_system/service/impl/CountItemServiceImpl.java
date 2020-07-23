@@ -39,16 +39,31 @@ public class CountItemServiceImpl extends ServiceImpl<CountItemMapper, CountItem
     @Autowired
     FixedItemService fixedItemService;
 
+    /**
+     * 分页查询
+     * @param countItemPage
+     * @return
+     */
     @Override
     public IPage<CountItem> selectPage(Page<CountItem> countItemPage) {
         return countItemMapper.selectPage(countItemPage, null);
     }
 
+    /**
+     * 根据参数分页查询
+     * @param importItemDtoPage
+     * @param countItemDto
+     * @return
+     */
     @Override
     public IPage<CountItemDto> selectCountItemPage(Page<ImportItemDto> importItemDtoPage, CountItemDto countItemDto) {
         return countItemMapper.selectCountItemPage(importItemDtoPage, countItemDto);
     }
 
+    /**
+     * 获取第一个运算项目
+     * @return
+     */
     @Override
     public List<String> getFirstOperation() {
         List<String> list = new ArrayList<>();
@@ -63,6 +78,10 @@ public class CountItemServiceImpl extends ServiceImpl<CountItemMapper, CountItem
         return list;
     }
 
+    /**
+     * 获取项目名称
+     * @return
+     */
     @Override
     public List<CountItem> getName() {
         List<CountItem> countItems = countItemMapper.selectList(null);

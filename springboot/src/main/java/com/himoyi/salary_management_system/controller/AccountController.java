@@ -1,7 +1,6 @@
 package com.himoyi.salary_management_system.controller;
 
 import cn.hutool.core.map.MapUtil;
-import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.himoyi.salary_management_system.common.Result;
 import com.himoyi.salary_management_system.common.dto.LoginDto;
@@ -15,8 +14,13 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 账号控制器
+ */
+
 @RestController
 @RequestMapping
+//后端跨域解决
 @CrossOrigin
 public class AccountController {
 

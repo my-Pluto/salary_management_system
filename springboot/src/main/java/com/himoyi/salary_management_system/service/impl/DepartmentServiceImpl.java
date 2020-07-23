@@ -27,15 +27,30 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
     @Autowired
     DepartmentMapper departmentMapper;
 
+    /**
+     * 获取省份
+     * @return
+     */
     public List<String> getProvinces() {
         return  departmentMapper.getProvinces();
     }
 
+    /**
+     * 分页
+     * @param page
+     * @return
+     */
     @Override
     public IPage<Department> selectPage(IPage<Department> page) {
         return departmentMapper.selectPage(page, null);
     }
 
+    /**
+     * 分页查询
+     * @param departmentDtoPage
+     * @param departmentDto
+     * @return
+     */
     @Override
     public IPage<Department> selectDepartmentPage(Page<DepartmentDto> departmentDtoPage, DepartmentDto departmentDto) {
         return departmentMapper.selectDepartmentPage(departmentDtoPage, departmentDto);

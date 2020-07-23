@@ -9,6 +9,12 @@ import NewUser from '../views/User/NewUser.vue'
 import Department from '../views/Department/Department.vue'
 import DepartmentData from '../views/Department/DepartmentData.vue'
 import NewDepartment from '../views/Department/NewDepartment.vue'
+import Employee from '../views/Employee/Employee.vue'
+import EmployeeData from '../views/Employee/EmployeeData.vue'
+import NewEmployee from '../views/Employee/NewEmployee.vue'
+import Position from '../views/Position/Position.vue'
+import PositionData from '../views/Position/PositionData.vue'
+import NewPosition from '../views/Position/NewPosition.vue'
 import FixedItem from '../views/Salary/FixedItem/FixedItem.vue'
 import FixedItemData from '../views/Salary/FixedItem/FixedItemData.vue'
 import NewFixedItem from '../views/Salary/FixedItem/NewFixedItem.vue'
@@ -96,6 +102,54 @@ const routes = [{
 			}
 		}]
 	},
+	{
+			path: '/position',
+			name:'position',
+			component: Position,
+			meta: {
+				requireAuth: true
+			},
+			children: [{
+				path: 'positiondata',
+				name: 'positiondata',
+				component: PositionData,
+				meta: {
+					requireAuth: true
+				}
+			},
+			{
+				path: 'newposition',
+				name:'newposition',
+				component: NewPosition,
+				meta: {
+					requireAuth: true
+				}
+			}]
+		},
+		{
+			path: '/employee',
+			name:'employee',
+			component: Employee,
+			meta: {
+				requireAuth: true
+			},
+			children: [{
+				path: 'employeedata',
+				name: 'employeedata',
+				component: EmployeeData,
+				meta: {
+					requireAuth: true
+				}
+			},
+			{
+				path: 'newemployee',
+				name:'newemployee',
+				component: NewEmployee,
+				meta: {
+					requireAuth: true
+				}
+			}]
+		},
 	{
 		path: '/fixeditem',
 		name: 'fixeditem',

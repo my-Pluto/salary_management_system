@@ -6,6 +6,9 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
+/**
+ * 计算项目DTO
+ */
 @Data
 public class CountItemDto {
     /**

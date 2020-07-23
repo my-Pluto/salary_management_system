@@ -28,16 +28,31 @@ public class ImportItemServiceImpl extends ServiceImpl<ImportItemMapper, ImportI
     @Autowired
     ImportItemMapper importItemMapper;
 
+    /**
+     * 分页
+     * @param importItemPage
+     * @return
+     */
     @Override
     public IPage<ImportItem> selectPage(Page<ImportItem> importItemPage) {
         return importItemMapper.selectPage(importItemPage, null);
     }
 
+    /**
+     * 分页查询
+     * @param importItemDtoPage
+     * @param importItemDto
+     * @return
+     */
     @Override
     public IPage<ImportItemDto> selectImportItemPage(Page<ImportItemDto> importItemDtoPage, ImportItemDto importItemDto) {
         return importItemMapper.selectImportItemPage(importItemDtoPage, importItemDto);
     }
 
+    /**
+     * 获取名称
+     * @return
+     */
     @Override
     public List<ImportItem> getName() {
         List<ImportItem> countItems = importItemMapper.selectList(null);

@@ -24,6 +24,8 @@ import java.util.Map;
  *  前端控制器
  * </p>
  *
+ * 岗位
+ *
  * @author 张玉飞 陈辰 刘月锟 宫雅琦 邵景宇
  * @since 2020-07-17
  */
@@ -35,6 +37,10 @@ public class PositionController {
     @Autowired
     PositionService positionService;
 
+    /**
+     * 获取所有
+     * @return
+     */
     @GetMapping("/positions")
     @RequiresAuthentication
     public Result getPositions() {
@@ -42,6 +48,12 @@ public class PositionController {
         return Result.success("查询成功！", positions);
     }
 
+    /**
+     * 分页获取所有
+     * @param page
+     * @param size
+     * @return
+     */
     @GetMapping("/positions/{page}/{size}")
     @RequiresAuthentication
     public Result getPositions(@PathVariable(name = "page") Integer page, @PathVariable(name = "size") Integer size) {
@@ -50,6 +62,11 @@ public class PositionController {
         return Result.success("查询成功！", positions);
     }
 
+    /**
+     * 查询
+     * @param positionDto
+     * @return
+     */
     @PostMapping("/positions")
     @RequiresAuthentication
     public Result getPositions(@RequestBody PositionDto positionDto) {
@@ -58,6 +75,13 @@ public class PositionController {
         return Result.success("查询成功！", positions);
     }
 
+    /**
+     * 分页查询
+     * @param positionDto
+     * @param page
+     * @param size
+     * @return
+     */
     @PostMapping("/positions/{page}/{size}")
     @RequiresAuthentication
     public Result getPositionsPage(@RequestBody PositionDto positionDto,
@@ -66,6 +90,11 @@ public class PositionController {
         return Result.success("查询成功！", positions);
     }
 
+    /**
+     * 添加
+     * @param position
+     * @return
+     */
     @PostMapping
     @RequiresAuthentication
     public Result addPosition(@Validated @RequestBody Position position) {
@@ -78,6 +107,11 @@ public class PositionController {
         return Result.success("添加成功！", null);
     }
 
+    /**
+     * 根据id更新
+     * @param position
+     * @return
+     */
     @PostMapping("{id}")
     @RequiresAuthentication
     public Result updatePosition(@Validated @RequestBody Position position) {
@@ -90,6 +124,11 @@ public class PositionController {
         return Result.success("更新成功！", null);
     }
 
+    /**
+     * 根据id删除
+     * @param id
+     * @return
+     */
     @DeleteMapping("{id}")
     @RequiresAuthentication
     public Result deletePosition(@PathVariable(name = "id") Long id) {

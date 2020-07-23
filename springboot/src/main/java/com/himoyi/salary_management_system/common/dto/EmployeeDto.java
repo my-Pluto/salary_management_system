@@ -4,6 +4,9 @@ import lombok.Data;
 
 import java.util.Date;
 
+/**
+ * 员工DTO
+ */
 @Data
 public class EmployeeDto {
     private static final long serialVersionUID=1L;

@@ -10,6 +10,11 @@ import java.io.Serializable;
 
 // 让result可以序列化
 
+/**
+ * 结果集
+ * 所有向前端返回的数据都使用结果集包装
+ */
+
 @Data
 public class Result implements Serializable {
     private String code;

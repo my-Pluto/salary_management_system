@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
  *  服务实现类
  * </p>
  *
+ * 岗位服务
+ *
  * @author 张玉飞 陈辰 刘月锟 宫雅琦 邵景宇
  * @since 2020-07-17
  */
@@ -24,11 +26,23 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, Position> i
 
     @Autowired
     PositionMapper positionMapper;
+
+    /**
+     * 分页
+     * @param page
+     * @return
+     */
     @Override
     public IPage<Position> selectPage(IPage<Position> page) {
         return positionMapper.selectPage(page, null);
     }
 
+    /**
+     * 分页查询
+     * @param positionPage
+     * @param positionDto
+     * @return
+     */
     @Override
     public IPage<Position> selectPositionPage(Page<PositionDto> positionPage, PositionDto positionDto) {
         return positionMapper.selectPositionPage(positionPage, positionDto);

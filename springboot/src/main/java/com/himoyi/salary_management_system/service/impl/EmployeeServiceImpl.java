@@ -25,11 +25,22 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
     @Autowired
     EmployeeMapper employeeMapper;
 
+    /**
+     * 分页
+     * @param page
+     * @return
+     */
     @Override
     public Page<Employee> selectPage(Page<Employee> page) {
         return employeeMapper.selectPage(page, null);
     }
 
+    /**
+     * 分页查询
+     * @param page
+     * @param employeeDto
+     * @return
+     */
     @Override
     public IPage<EmployeesDto> selectEmployeePage(Page<EmployeeDto> page, EmployeeDto employeeDto) {
         return employeeMapper.selectEmployeePage(page, employeeDto);

@@ -2,31 +2,24 @@ package com.himoyi.salary_management_system.controller;
 
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.map.MapUtil;
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.himoyi.salary_management_system.common.Result;
 import com.himoyi.salary_management_system.common.dto.DepartmentDto;
-import com.himoyi.salary_management_system.common.dto.PositionDto;
 import com.himoyi.salary_management_system.pojo.Department;
 import com.himoyi.salary_management_system.pojo.Employee;
 import com.himoyi.salary_management_system.pojo.Position;
 import com.himoyi.salary_management_system.service.DepartmentService;
 import com.himoyi.salary_management_system.service.EmployeeService;
 import com.himoyi.salary_management_system.service.PositionService;
-import javafx.geometry.Pos;
-import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +27,8 @@ import java.util.Map;
  * <p>
  * 前端控制器
  * </p>
+ *
+ * 部门控制器
  *
  * @author 张玉飞 陈辰 刘月锟 宫雅琦 邵景宇
  * @since 2020-07-17
@@ -61,6 +56,12 @@ public class DepartmentController {
         return Result.success("查询成功！", departments);
     }
 
+    /**
+     * 所有部门，分页查询
+     * @param page
+     * @param size
+     * @return
+     */
     @GetMapping("/departments/{page}/{size}")
     @RequiresAuthentication
     public Result getUsersPage(@PathVariable(name = "page") Integer page, @PathVariable(name = "size") Integer size) {
@@ -69,6 +70,10 @@ public class DepartmentController {
         return Result.success("查询成功！", departments);
     }
 
+    /**
+     * 获取有部门存在的省份
+     * @return
+     */
     @GetMapping("/departments/provinces")
     @RequiresAuthentication
     public Result getProvinces() {
@@ -82,6 +87,7 @@ public class DepartmentController {
         }
         return Result.success("查询成功！", list);
     }
+
     /**
      * 根据id查询部门
      * @param id
@@ -110,6 +116,13 @@ public class DepartmentController {
         return Result.success("查询成功！", departments);
     }
 
+    /**
+     * 部门分页查询，模糊查询
+     * @param departmentDto
+     * @param page
+     * @param size
+     * @return
+     */
     @PostMapping("/department/{page}/{size}")
     @RequiresAuthentication
     public Result getPositionsPage(@RequestBody DepartmentDto departmentDto,

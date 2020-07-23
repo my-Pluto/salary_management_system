@@ -27,6 +27,8 @@ import java.util.Set;
  *  前端控制器
  * </p>
  *
+ * 导入项目数据
+ *
  * @author 张玉飞 陈辰 刘月锟 宫雅琦 邵景宇
  * @since 2020-07-17
  */
@@ -42,6 +44,10 @@ public class ImportItemDataController {
     EmployeeService employeeService;
 
 
+    /**
+     * 获取所有
+     * @return
+     */
     @GetMapping
     @RequiresAuthentication
     public Result getimportItemDatas() {
@@ -49,14 +55,56 @@ public class ImportItemDataController {
         return Result.success("查询成功！", importItemData);
     }
 
-    @GetMapping("/importitemdata/{page}/{size}")
+    /**
+     * 分页
+     * @param page
+     * @param size
+     * @return
+     */
+    @GetMapping("/importitemdatas/{page}/{size}")
     @RequiresAuthentication
     public Result getimportItemData(@PathVariable(name = "page") Integer page, @PathVariable(name = "size") Integer size){
         Map<String, Object> list = importItemDataService.getData(page, size, null);
         return Result.success("查询成功！", list);
     }
 
-    @PostMapping("/importitemdata/{page}/{size}")
+    /**
+     * 获取数据，查询
+     * @param importItemDataDto
+     * @return
+     */
+    @PostMapping("/importitemdata/employee")
+    @RequiresAuthentication
+    public Result getEmployee(@RequestBody ImportItemDataDto importItemDataDto) {
+        ImportItemData importItemData = importItemDataService.getOne(new QueryWrapper<ImportItemData>()
+                .eq("employee_id", importItemDataDto.getEmployeeId())
+                .eq("month", importItemDataDto.getMonth())
+                .eq("item_name", importItemDataDto.getItemName()));
+
+        return Result.success("查询成功！", importItemData);
+    }
+
+    /**
+     * 更新
+     * @param importItemData
+     * @return
+     */
+    @PutMapping("/importitemdata/employee")
+    @RequiresAuthentication
+    public Result updateEmployee(@RequestBody ImportItemData importItemData) {
+        importItemDataService.updateById(importItemData);
+        return Result.success("更新成功", null);
+
+    }
+
+    /**
+     * 分页查询
+     * @param importItemDataDto
+     * @param page
+     * @param size
+     * @return
+     */
+    @PostMapping("/importitemdatas/{page}/{size}")
     @RequiresAuthentication
     public Result getimportItemDataByData(@RequestBody ImportItemDataDto importItemDataDto,
                                          @PathVariable(name = "page") Integer page, @PathVariable(name = "size") Integer size) {
@@ -66,12 +114,19 @@ public class ImportItemDataController {
         return Result.success("查询成功！", list);
     }
 
+    /**
+     * 批量修改数据
+     * @param importItemData
+     * @return
+     */
     @PostMapping("/importitemdata")
     @RequiresAuthentication
     public Result saveOrUpdateImportItemData(@RequestBody ImportItemData importItemData) {
         if (importItemData.getEmployeeId() == null || importItemData.getEmployeeName() == null) {
+            // 获取员工信息
             List<Employee> employees = employeeService.list(
                     new QueryWrapper<Employee>().eq("department", importItemData.getDeptId()));
+            // 批量修改
             for (Employee employee : employees) {
                 ImportItemData importItemData1 = new ImportItemData();
                 BeanUtil.copyProperties(importItemData, importItemData1);
@@ -84,21 +139,34 @@ public class ImportItemDataController {
         return Result.success("批量修改成功！",null);
     }
 
-    @PostMapping("/importitemdata/{employeeid}")
+    /**
+     * 根据id、月份更新
+     * @param json
+     * @param id
+     * @param month
+     * @return
+     */
+    @PostMapping("/importitemdata/{employeeid}/{month}")
     @RequiresAuthentication
-    public Result updateImportItemDataByEmployeeId(@RequestBody String json, @PathVariable(name = "employeeid") Long id) {
-        System.out.println(json);
+    public Result updateImportItemDataByEmployeeId(@RequestBody String json,
+                                                   @PathVariable(name = "employeeid") Long id,
+                                                   @PathVariable(name = "month") String month) {
         JSONObject jsonObject = JSONUtil.parseObj(json);
-        System.out.println(jsonObject.keySet());
         Set<String> strings = jsonObject.keySet();
         for (String string : strings) {
             Object o = jsonObject.get(string);
             System.out.println(o.toString());
-            importItemDataService.updateByEmployeeId(BigDecimal.valueOf(Double.parseDouble(o.toString())), id, string, importItemDataService.getLastMonth());
+            importItemDataService.updateByEmployeeId(BigDecimal.valueOf(Double.parseDouble(o.toString())), id, string, month);
         }
         return Result.success("更新成功！", null);
     }
 
+    /**
+     * 删除
+     * @param id
+     * @param date
+     * @return
+     */
     @DeleteMapping("/{id}/{month}")
     @RequiresAuthentication
     public Result deleteFixedItemData(@PathVariable(name = "id") Long id, @PathVariable(name = "month") Date date) {

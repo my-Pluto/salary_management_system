@@ -1,13 +1,12 @@
 package com.himoyi.salary_management_system.common.dto;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.Version;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.Date;
+
+/**
+ * 报表Dto
+ */
 
 @Data
 public class StatementDto {

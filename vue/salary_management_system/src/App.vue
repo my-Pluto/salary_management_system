@@ -4,11 +4,11 @@
 		 text-color="#fff" active-text-color="#ffd04b" v-if="show">
 			<el-menu-item index="/index">主页</el-menu-item>
 			<el-submenu index="/personnel">
-				<template slot="title">人事管理</template>
-				<el-menu-item index="/personnel/department">部门管理</el-menu-item>
-				<el-menu-item index="/personnel/employee">员工管理</el-menu-item>
-				<el-menu-item index="/personnel/position">岗位管理</el-menu-item>
-			</el-submenu>
+							<template slot="title">人事管理</template>
+							<el-menu-item index="/department" >部门管理</el-menu-item>
+							<el-menu-item index="/employee">员工管理</el-menu-item>
+							<el-menu-item index="/position">岗位管理</el-menu-item>
+						</el-submenu>
 			<el-submenu index="/salary">
 				<template slot="title">工资管理</template>
 				<el-menu-item index="/fixeditem">固定项目管理</el-menu-item>

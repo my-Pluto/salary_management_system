@@ -22,6 +22,8 @@ import java.util.List;
  *  前端控制器
  * </p>
  *
+ * 导入项目
+ *
  * @author 张玉飞 陈辰 刘月锟 宫雅琦 邵景宇
  * @since 2020-07-17
  */
@@ -35,6 +37,9 @@ public class ImportItemController {
     @Autowired
     ImportItemDataService importItemDataService;
 
+    /*
+    查询所有
+     */
     @GetMapping("/importitem")
     @RequiresAuthentication
     public Result getImportItems() {
@@ -42,6 +47,12 @@ public class ImportItemController {
         return Result.success("查询成功！", importItems);
     }
 
+    /**
+     * 分页获取所有
+     * @param page
+     * @param size
+     * @return
+     */
     @GetMapping("/importitem/{page}/{size}")
     @RequiresAuthentication
     public Result getImportItems(@PathVariable(name = "page") Integer page, @PathVariable(name = "size") Integer size) {
@@ -49,6 +60,13 @@ public class ImportItemController {
         return Result.success("查询成功！", importItemIPage);
     }
 
+    /**
+     * 分页数据查询
+     * @param importItemDto
+     * @param page
+     * @param size
+     * @return
+     */
     @PostMapping("/importitem/{page}/{size}")
     @RequiresAuthentication
     public Result getImportItems(@RequestBody ImportItemDto importItemDto,
@@ -58,6 +76,11 @@ public class ImportItemController {
         return Result.success("查询成功！", importItemDtoIPage);
     }
 
+    /**
+     * 添加
+     * @param importItem
+     * @return
+     */
     @PostMapping
     @RequiresAuthentication
     public Result addImportItem(@RequestBody ImportItem importItem) {
@@ -74,6 +97,12 @@ public class ImportItemController {
         return Result.success("添加成功！", null);
     }
 
+    /**
+     * 根据id更新
+     * @param importItem
+     * @param id
+     * @return
+     */
     @PostMapping("{id}")
     public Result updateImportItem(@RequestBody ImportItem importItem, @PathVariable(name = "id") Long id) {
         if (importItemService.getById(id) == null) {
@@ -87,6 +116,11 @@ public class ImportItemController {
         return Result.success("更新成功！", null);
     }
 
+    /**
+     * 根据id 删除
+     * @param id
+     * @return
+     */
     @DeleteMapping("{id}")
     @RequiresAuthentication
     public Result deleteImportItem(@PathVariable(name = "id") Long id) {
