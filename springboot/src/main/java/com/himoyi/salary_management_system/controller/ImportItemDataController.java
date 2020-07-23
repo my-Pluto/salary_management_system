@@ -132,7 +132,7 @@ public class ImportItemDataController {
                 BeanUtil.copyProperties(importItemData, importItemData1);
                 importItemData1.setEmployeeId(employee.getId());
                 importItemData1.setEmployeeName(employee.getName());
-                importItemData1.setMonth(importItemDataService.getLastMonth());
+                importItemData1.setMonth(importItemData.getMonth());
                 importItemDataService.saveOrUpdate(importItemData1);
             }
         }
