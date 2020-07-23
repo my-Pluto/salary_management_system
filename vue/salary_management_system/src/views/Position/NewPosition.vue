@@ -25,7 +25,7 @@
 			</el-form-item>
 			<el-form-item>
 				<el-popover placement="top" width="160" v-model="visible">
-					<p>确定要添加该部门吗？</p>
+					<p>确定要添加该岗位吗？</p>
 					<div style="text-align: right; margin: 0">
 						<el-button size="mini" type="text" @click="visible = false">取消</el-button>
 						<el-button type="primary" size="mini" @click="submitForm('form')">确定</el-button>
